@@ -3,60 +3,763 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Projects - Marcus Chitura</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Marcus Chitura - Project Portfolio</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .project-nav {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .project-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: white;
+            border: 2px solid var(--secondary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        #projects {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-header {
+            padding: 1.5rem;
+            background: var(--primary);
+            color: white;
+        }
+        
+        .project-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-category {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+        
+        .project-details {
+            margin: 1rem 0;
+        }
+        
+        .project-details li {
+            margin-bottom: 0.5rem;
+            list-style-type: none;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .project-details li:before {
+            content: "•";
+            color: var(--secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: var(--light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--dark);
+        }
+        
+        .result-highlight {
+            background: #e8f4fc;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary);
+            margin: 1rem 0;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: auto;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            background: var(--primary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark);
+            color: white;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            #projects {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 1000px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: modalFade 0.3s;
+        }
+        
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .content-section {
+            margin-bottom: 2rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .gallery-item {
+            background: var(--light);
+            height: 180px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .download-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .download-btn:hover {
+            background: var(--primary);
+        }
+        
+        .coming-soon {
+            background: var(--light);
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+        
+        .coming-soon:hover {
+            background: var(--light);
+            transform: none;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <a href="index.html">← Back to Home</a>
+        <a href="index.html" class="back-btn">← Back to Home</a>
         <h1>Project Portfolio</h1>
+        <p class="subtitle">A showcase of my technical projects and research initiatives</p>
     </header>
+
+    <div class="project-nav">
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="networking">Networking</button>
+            <button class="filter-btn" data-filter="control-systems">Control Systems</button>
+            <button class="filter-btn" data-filter="power-electronics">Power Electronics</button>
+        </div>
+    </div>
 
     <section id="projects">
         <!-- PROJECT 1 -->
-        <div class="project-card">
-            <h2>Edge Computation in 5G IAB Networks</h2>
-            <p><em>Optimizing task offloading at the network edge to minimize latency and energy consumption.</em></p>
-            <ul>
-                <li><strong>Tools:</strong> NS-3, C++, Python</li>
-                <li><strong>Key Result:</strong> Achieved a 25% reduction in average latency compared to centralized cloud offloading.</li>
-            </ul>
-            <a href="#">Read More (Page Coming Soon)</a>
-            <!-- Future link: href="projects/edge-computation-5g.html" -->
+        <div class="project-card" data-category="networking">
+            <div class="project-header">
+                <h2>Edge Computation in 5G IAB Networks</h2>
+                <div class="project-category">Networking & Edge Computing</div>
+            </div>
+            <div class="project-content">
+                <p><em>This project focused on producing a computation offloading method focused on optimising task offloading at the network edge to minimize latency and energy consumption.</em></p>
+                
+                <div class="tech-tags">
+                    <span class="tech-tag">NS-3</span>
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Network Simulation</span>
+                </div>
+                
+                <div class="project-details">
+                    <ul>
+                        <li><strong>Focus:</strong> Network optimization and edge computing</li>
+                        <li><strong>Duration:</strong>  8 weeks</li>
+                        <li><strong>Role:</strong> Researcher & Developer</li>
+                    </ul>
+                </div>
+                
+                <div class="result-highlight">
+                    <strong>Key Result:</strong> Collected results indicate that the proposed multi-objective
+algorithm maintains a balanced trade-off between energy efficiency (89.3 %) and offloading rate (43.9 %) while achieving minimal
+latency, full deadline adherence, and 100 % reliability across multiple network slices.
+                </div>
+                
+                <a href="#" class="project-link" data-project="project1">View Project Details</a>
+            </div>
         </div>
 
         <!-- PROJECT 2 -->
-        <div class="project-card">
-            <h2>Footbridge Active Vibration Control</h2>
-            <p><em>Designing an LQR controller to suppress vibrations in a structural system.</em></p>
-            <ul>
-                <li><strong>Tools:</strong> MATLAB & Simulink</li>
-                <li><strong>Key Result:</strong> Designed a controller that reduced oscillation amplitude by over 90% in simulation.</li>
-            </ul>
-            <a href="#">Read More (Page Coming Soon)</a>
+        <div class="project-card" data-category="control-systems">
+            <div class="project-header">
+                <h2>Footbridge Active Vibration Control</h2>
+                <div class="project-category">Control Systems & Structural Engineering</div>
+            </div>
+            <div class="project-content">
+                <p><em>Designing an active control system to negate structural vibrations caused by lateral synchronous excitation. This was achieved by the proposal of a total sum multi-actuator LQR based control law.</em></p>
+                
+                <div class="tech-tags">
+                    <span class="tech-tag">MATLAB</span>
+                    <span class="tech-tag">Simulink</span>
+                    <span class="tech-tag">Control Systems</span>
+                </div>
+                
+                <div class="project-details">
+                    <ul>
+                        <li><strong>Focus:</strong> Structural engineering and control systems</li>
+                        <li><strong>Duration:</strong> 8 weeks </li>
+                        <li><strong>Role:</strong> Control System Designer</li>
+                    </ul>
+                </div>
+                
+                <div class="result-highlight">
+                    <strong>Key Result:</strong> The proposed control law was tested on a MDOF footbridge model linearised for lateral vibrations. The results show that the controller was able to reduce structural vibrations from the second to the sixth modes of vibration, showcasing improvements in lateral excitation mitigation maximum of 72.6 % with a minimum of 35.7 % meeting servicebility criteria and practical implementation limits. 
+                </div>
+                
+                <a href="#" class="project-link" data-project="project2">View Project Details</a>
+            </div>
         </div>
 
         <!-- PROJECT 3 -->
-        <div class="project-card">
-            <h2>Uninterruptible Power Supply (UPS) System</h2>
-            <p><em>Comprehensive design and simulation of a line-interactive UPS.</em></p>
-            <ul>
-                <li><strong>Tools:</strong> LTspice, FEMM</li>
-                <li><strong>Key Result:</strong> Simulated a design achieving 91.7% efficiency with seamless mains-to-battery transition.</li>
-            </ul>
-            <a href="#">Read More (Page Coming Soon)</a>
-        </div>
-
-        <!-- PROJECT 4 -->
-        <div class="project-card">
-            <h2>Audio-Guided RC Car</h2>
-            <p><em>Developing a system for controlling a vehicle based on audio frequency commands.</em></p>
-            <ul>
-                <li><strong>Tools:</strong> Arduino, C, FFT Analysis</li>
-                <li><strong>Key Result:</strong> Successfully implemented a reliable control system with >95% command recognition accuracy.</li>
-            </ul>
-            <a href="#">Read More (Page Coming Soon)</a>
+        <div class="project-card" data-category="control-systems">
+            <div class="project-header">
+                <h2>Application of Full State Feedback Controller on a Non-Linear Braking System for EV</h2>
+                <div class="project-category">Control Systems & Systems Design</div>
+            </div>
+            <div class="project-content">
+                <p><em>Comprehensive design and simulation of a non-linear feedback controller for optimised slip control.</em></p>
+                
+                <div class="tech-tags">
+                    <span class="tech-tag">Simulink</span>
+                    <span class="tech-tag">Control Systems</span>
+                    <span class="tech-tag">Power Electronics</span>
+                </div>
+                
+                <div class="project-details">
+                    <ul>
+                        <li><strong>Focus:</strong> Control systems and power engineering </li>
+                        <li><strong>Duration:</strong> 10 weeks</li>
+                        <li><strong>Role:</strong> Control Systems Engineer</li>
+                    </ul>
+                </div>
+                
+                <div class="result-highlight">
+                    <strong>Key Result:</strong> The simulated model showed that the full state feedback controller was able to maintain the slip coefficient within optimal braking limits across varying road conditions, enhancing braking performance and safety. A 3 second breaking time was achieved for a vehicle at 100 km/h on a high friction road surface meeting performance criteria based on the Tesla Model S regenerative braking system which received a 5 star NCAP safety rating. A optimal 0.20 friction coefficient was maintained across varying road conditions.
+                </div>
+                
+                <a href="#" class="project-link" data-project="project3">View Project Details</a>
+            </div>
         </div>
     </section>
+    
+    <footer>
+        <p>© 2023 Marcus Chitura | Project Portfolio</p>
+    </footer>
+
+    <!-- Project 1 Modal -->
+    <div id="project1-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edge Computation in 5G IAB Networks</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="content-section">
+                    <h3>Project Overview</h3>
+                    <p>This research project focused on optimizing task offloading strategies in 5G Integrated Access and Backhaul (IAB) networks to minimize latency and energy consumption for edge computing applications.</p>
+                    
+                    <div class="tech-tags">
+                        <span class="tech-tag">NS-3</span>
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">MATLAB</span>
+                        <span class="tech-tag">Network Simulation</span>
+                        <span class="tech-tag">5G Networks</span>
+                        <span class="tech-tag">Multi-Objective Optimisation Algorithm</span>
+                    </div>
+                    
+                    <div class="project-details">
+                        <ul>
+                            <li><strong>Duration:</strong> 8 weeks</li>
+                            <li><strong>Role:</strong> Researcher & Developer</li>
+                            <li><strong>Category:</strong> Networking & Edge Computing</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Problem Statement</h3>
+                    <p> Existing computation offloading methods are ineffective for 5G mmWave IAB networks because they assume stable links and simple topologies. They fail to dynamically adapt to the real-world challenges of volatile mmWave signals, the energy cost of multi-hop routing, and congestion in a shared wireless backhaul. This project designed a new offloading algorithm to solve this gap, enabling efficient, low-latency, and energy-conscious task execution in next-generation networks.</p>
+                    
+                    <h4>Key Challenges</h4>
+                    <ul>
+                        <li>Energy efficiency in multi-hop network topologies</li>
+                        <li>Conflicting quality of service requirements across the different 5G network slices</li>
+                        <li>Computational complexity for real time decision making</li>
+                        <li>Designing an algorithm complex enough to be effective yet simple enough for polynomial-time execution in a dynamic network</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Methodology & Approach</h3>
+                    <p>Developed a hierarchical edge computing framework integrated with 5G IAB network topology, implementing dynamic task allocation algorithms based on real-time network conditions.</p>
+                    
+                    <h4>Technical Implementation</h4>
+                    <ul>
+                        <li>Designed a directed acyclic graph network topology with 8 IAB nodes collocated with a MEC server at the gNB base station, with a a dynamic propagation model using 3GPP UMi Canyon Modelling.</li>
+                        <li>Implemented a Breadth First Search routing selection policy to ensure efficiency load balancing across the network.</li>
+                        <li>Developed a slice specific multi-objective optimisation algorithm.</li>
+                        <li>Benchmarked the performance of the proposed algorithm against other optimisation algorithms such as convex game theory optimisation,single objective optimisation and joint objective optimisation. </li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Results & Analysis</h3>
+                    
+                    <div class="result-highlight">
+                        <strong>Key Achievement:</strong> Collected results indicate that the proposed multi-objective algorithm maintains a balanced trade-off between energy efficiency (89.3 %) and offloading rate (43.9 %) while achieving minimal latency, full deadline adherence, and 100 % reliability across multiple network slices.
+                    </div>
+                    
+                    <h4>Performance Metrics</h4>
+                    <ul>
+                        <li> Achieved a minimum latency of 4.4 ms with a average of 11.5 ms across 1531 URLLC tasks. </li>
+                        <li> Achieved a network throughput of 3.25 Gbps peaking at 5.42 Gbps for the URLLC network slice indicating latency improvements are met without compromising data rate performance.</li>
+                        <li> Achieved a minimum latency of 4.1 ms and a average of 153.4 ms across 2813 eMMB tasks.</li>
+                        <li> The eMMB network slice attained a data rate of 3.2 Gbps peaking at 5.54 Gbps, showing sustainability of eMMB services.</li>
+                        <li> Energy efficiency improvements of up to 89.3% were observed while maintaining an offloading rate of 43.9% across the 5044 tasks produced in the simulation environment.</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Project Materials</h3>
+                    
+                    <div class="download-links">
+                        <a href="assets/pdfs/edge-computation-5g-report.pdf" class="download-btn" target="_blank">
+                            Project Report PDF
+                        </a>
+                        <a href="assets/code/edge-computation-code.zip" class="download-btn">
+                            Optimisation Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 2 Modal -->
+    <div id="project2-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Footbridge Active Vibration Control</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="content-section">
+                    <h3>Project Overview</h3>
+                    <p>This project involved designing and simulating an active vibration control system for pedestrian footbridges using Linear Quadratic Regulator (LQR) control theory to suppress structural vibrations induced by human movement and environmental factors.</p>
+                    
+                    <div class="tech-tags">
+                        <span class="tech-tag">MATLAB</span>
+                        <span class="tech-tag">Simulink</span>
+                        <span class="tech-tag">Control Systems</span>
+                        <span class="tech-tag">LQR Control</span>
+                        <span class="tech-tag">Structural Dynamics</span>
+                    </div>
+                    
+                    <div class="project-details">
+                        <ul>
+                            <li><strong>Duration:</strong> 8 weeks</li>
+                            <li><strong>Role:</strong> Control System Designer</li>
+                            <li><strong>Category:</strong> Control Systems & Structural Engineering</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Problem Statement</h3>
+                    <p>Pedestrian footbridges often experience excessive vibrations due to human-induced loads and environmental factors, leading to discomfort for users and potential structural integrity issues over time.</p>
+                    
+                    <h4>Key Challenges</h4>
+                    <ul>
+                        <li>Modelling a MDOF footbridge that is susceptible lateral excitations</li>
+                        <li>Designing a controller robust to varying excitation frequencies</li>
+                        <li>Minimizing control effort while maximizing vibration suppression within servicebility limits</li>
+                        <li>Accounting for real-world implementation constraints</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Methodology & Approach</h3>
+                    <p> The solution was approached iteratively, with the initial implementation of a single degree of freedom PID controller for proof of concept. This was developed into a single degree of freedom LQR controller in state space to compare the performance of the two proposed control paths. A multi-degree of freedom model of the footbridge susceptible to lateral excitations was proposed, this was paired with a proposed total sum penalty multi-actuator LQR control law aimed at providing vibration supression at multiple frequencies.</p>
+                    
+                    <h4>Technical Implementation</h4>
+                    <ul>
+                        <li>Created detailed mathematical model of bridge dynamics</li>
+                        <li>Implemented LQR controller with optimized weighting matrices</li>
+                        <li>Simulated system response to various excitation patterns</li>
+                        <li>Analyzed controller performance under different scenarios</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Results & Analysis</h3>
+                    
+                    <div class="result-highlight">
+                        <strong>Key Achievement:</strong> The controller reduced structural vibrations from the second to the sixth modes of vibration, with improvements in lateral excitation mitigation ranging from 35.7% to 72.6%, meeting serviceability criteria and practical implementation limits.
+                    </div>
+                    
+                    <h4>Performance Metrics</h4>
+                    <ul>
+                        <li>Vibration amplitude reduction: 35.7% - 72.6% across modes</li>
+                        <li>Settling time improvement: 75% faster</li>
+                        <li>Control effort: Within practical implementation limits</li>
+                        <li>Robustness: Maintained performance across frequency range</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Project Materials</h3>
+                    
+                    <div class="download-links">
+                        <a href="assets/pdfs/footbridge-vibration-report.pdf" class="download-btn" target="_blank">
+                            Project Report PDF
+                        </a>
+                        <a href="assets/code/footbridge-matlab-code.zip" class="download-btn">
+                            MATLAB Code & Simulink Models
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 3 Modal -->
+    <div id="project3-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Application of Full State Feedback Controller on a Non-Linear Braking System for EV</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="content-section">
+                    <h3>Project Overview</h3>
+                    <p> This project involved the implementation of a full state linearisation control law, aimed at controlling the slip coefficient ensuring optimal braking in different road conditions.</p>
+                    
+                    <div class="tech-tags">
+                        <span class="tech-tag">Simulink</span>
+                        <span class="tech-tag">Non-Linear Control</span>
+                        <span class="tech-tag">Control Systems</span>
+                    </div>
+                    
+                    <div class="project-details">
+                        <ul>
+                            <li><strong>Duration:</strong> 10 weeks </li>
+                            <li><strong>Role:</strong> Control System Designer</li>
+                            <li><strong>Category:</strong> Power Electronics & Systems Design</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Problem Statement</h3>
+                    <p>Traditional braking systems struggle to maintain optimal slip ratios across varying road conditions, leading to reduced braking efficiency and safety concerns.</p>
+                    
+                    <h4>Key Challenges</h4>
+                    <ul>
+                        <li>Simulation of system dynamics for non-linear system.</li>
+                        <li>Mathematical formulation of non-linear feedback linearisation law.</li>
+                        <li>Achieving optimal braking and meeting performance criteria for optimal braking coefficient.</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Methodology & Approach</h3>
+                    <p>Designed a line-interactive UPS topology with automatic voltage regulation, battery backup, and fast switching between mains and battery power.</p>
+                    
+                    <h4>Technical Implementation</h4>
+                    <ul>
+                        <li>Simulated system dynamics in Simulink.</li>
+                        <li> Develop system dynamics and apply Lie derivatives to find the linearised feedback control law.</li>
+                        <li> Use pole placement to control the performance of the car model to ensure performance criteria is met.</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Results & Analysis</h3>
+                    
+                    <div class="result-highlight">
+                        <strong>Key Achievement:</strong> The simulated model showed that the full state feedback controller was able to maintain the slip coefficient within optimal braking limits across varying road conditions, enhancing braking performance and safety. A 3 second breaking time with a braking distance of 41.69 m was achieved for a vehicle at 100 km/hr on a high friction road surface meeting performance criteria based on the Tesla Model S regenerative braking system which received a 5 star NCAP safety rating. A optimal 0.20 friction coefficient was maintained across varying road conditions.
+                    </div>
+                    
+                    <h4>Performance Metrics</h4>
+                    <ul>
+                        <li> Achieved a 3 second braking time for a car at 100.91 km/hr </li>
+                        <li> Achieved a 41.69 m braking distance</li>
+                        <li> Achieved a 0.20 slip ratio coefficient</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Project Materials</h3>
+                    
+                    <div class="download-links">
+                        <a href="assets/pdfs/nonlinear-control-report.pdf" class="download-btn" target="_blank">
+                           Project Report PDF
+                        </a>
+                        <a href="assets/code/feedback-linearisation.zip" class="download-btn">
+                            Simulink Model File
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+                
+                // Filter projects
+                const filter = button.getAttribute('data-filter');
+                document.querySelectorAll('.project-card').forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Modal functionality
+        document.querySelectorAll('.project-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const projectId = link.getAttribute('data-project');
+                const modal = document.getElementById(`${projectId}-modal`);
+                if (modal) {
+                    modal.style.display = 'block';
+                }
+            });
+        });
+        
+        document.querySelectorAll('.close-modal').forEach(button => {
+            button.addEventListener('click', () => {
+                button.closest('.modal').style.display = 'none';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

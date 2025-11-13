@@ -3,24 +3,752 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcus Chitura - Graduate Engineer</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Marcus Chitura - Graduate Electrical Engineer</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.8;
+        }
+        
+        .scroll-indicator {
+            margin-top: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        section {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+        
+        #about {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .skill-tag {
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .skill-tag:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .profile-image {
+            text-align: center;
+        }
+        
+        .profile-placeholder {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--light);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            border: 5px solid var(--secondary);
+        }
+        
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .link-btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .link-btn.secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        
+        .link-btn.secondary:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .featured-projects {
+            margin-top: 3rem;
+        }
+
+        .profile-photo {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .profile-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .project-preview {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .project-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-image {
+            height: 160px;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+        
+        .project-info {
+            padding: 1.5rem;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .project-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark);
+            color: white;
+            margin-top: 3rem;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .content-section {
+            margin-bottom: 2rem;
+        }
+        
+        .content-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .content-section h4 {
+            color: var(--dark);
+            margin: 1rem 0 0.5rem;
+        }
+        
+        .content-section p {
+            margin-bottom: 1rem;
+        }
+        
+        .content-section ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .content-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tech-tag {
+            background: var(--light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--dark);
+        }
+        
+        .project-details {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .project-details ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .project-details li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-highlight {
+            background: #e8f4fd;
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .title {
+                font-size: 1.2rem;
+            }
+            
+            .links {
+                justify-content: center;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 1rem auto;
+            }
+            
+            .modal-header {
+                padding: 1rem;
+            }
+            
+            .modal-body {
+                padding: 1rem;
+            }
+        }
+
+        /* Featured Projects Styles */
+        .featured-projects {
+            padding: 80px 20px;
+            background-color: #f8f9fa;
+        }
+
+        .featured-projects h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .featured-projects h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #4a6491;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-preview {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-preview:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 220px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-preview:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+
+        .project-info p {
+            color: #6c757d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: #4a6491;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #2c3e50;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-projects h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Marcus Chitura</h1>
-        <p>Graduate Electrical Engineer</p>
+        <div class="header-content">
+            <h1>Marcus Chitura</h1>
+            <p class="title">Graduate Electrical Engineer</p>
+            <p class="tagline">Designing efficient solutions to complex engineering problems</p>
+            <div class="scroll-indicator">↓</div>
+        </div>
     </header>
 
     <section id="about">
         <h2>About Me</h2>
-        <p>Detail-oriented and motivated Graduate Electrical Engineer with a strong foundation in [Your Key Skills, e.g., control systems, power electronics, communication systems]. Passionate about designing and implementing efficient solutions to complex engineering problems. This portfolio showcases my hands-on project experience and technical communication skills.</p>
-        <div class="links">
-            <a href="https://www.linkedin.com/in/yourprofile/">LinkedIn</a>
-            <a href="https://github.com/marcuschitura">GitHub</a>
-            <a href="assets/your-resume.pdf">Resume (PDF)</a> <!-- Upload your PDF to assets/ -->
-            <a href="projects.html">View My Projects</a>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+      I've always been fascinated by how small systems can create big change, how a control loop can be the basis of stabilising a speed car, or an algorithm can make a network more efficient. That curiosity led me to electrical engineering, where I focus on control, embedded systems, and communication technologies. 
+    </p>
+               <p>
+      This portfolio is a reflection of that journey, projects where I learned to think critically, design precisely, and build things that actually work.
+    </p>
+                <div class="skills">
+                    <span class="skill-tag">Control Systems</span>
+                    <span class="skill-tag">Power Electronics</span>
+                    <span class="skill-tag">Communication Systems</span>
+                    <span class="skill-tag">MATLAB & Simulink</span>
+                    <span class="skill-tag">C/C++</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">LTspice</span>
+                    <span class="skill-tag">Arduino</span>
+                </div>
+                
+                <div class="links">
+                    <a href="https://www.linkedin.com/in/marcus-chitura-429491245/" class="link-btn">LinkedIn</a>
+                    <a href="assets/your-resume.pdf" class="link-btn secondary">Resume</a>
+                    <a href="projects.html" class="link-btn">Project Portfolio</a>
+                </div>
+            </div>
+            
+            <div class="profile-image">
+        <img src="assets/images/your-photo.jpg" alt="Marcus Chitura" class="profile-photo">
+    </div>
+</div>
         </div>
     </section>
+    
+ <section class="featured-projects">
+    <h2>Featured Projects</h2>
+    <div class="projects-grid">
+        <div class="project-preview">
+            <div class="project-image">
+                <!-- Replace with your image path -->
+                <img src="assets/images/5g-network.jpg" alt="Edge Computation in 5G IAB Networks">
+            </div>
+            <div class="project-info">
+                <h3>Edge Computation in 5G IAB Networks</h3>
+                <p>Optimizing task offloading at the network edge to minimize latency and energy consumption.</p>
+                <a href="projects.html" class="project-link">View Project →</a>
+            </div>
+        </div>
+        
+        <div class="project-preview">
+            <div class="project-image">
+                <!-- Replace with your image path -->
+                <img src="assets/images/footbridge-vibration.jpg" alt="Footbridge Active Vibration Control">
+            </div>
+            <div class="project-info">
+                <h3>Footbridge Active Vibration Control</h3>
+                <p>Designing an LQR controller to suppress vibrations in a structural system.</p>
+                <a href="projects.html" class="project-link">View Project →</a>
+            </div>
+        </div>
+        
+        <div class="project-preview" onclick="openModal('project3-modal')">
+            <div class="project-image">
+                <!-- Replace with your image path -->
+                <img src="assets/images/ev-braking-system.jpg" alt="EV Braking System Control">
+            </div>
+            <div class="project-info">
+                <h3>EV Braking System Control</h3>
+                <p>Full state feedback controller implementation for optimal braking in electric vehicles.</p>
+                <a href="#" class="project-link">View Project →</a>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <footer>
+        <p>© 2023 Marcus Chitura | Graduate Electrical Engineer</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Designed with attention to detail and engineering principles</p>
+    </footer>
+
+    <!-- Project 3 Modal -->
+    <div id="project3-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Application of Full State Feedback Controller on a Non-Linear Braking System for EV</h2>
+                <button class="close-modal" onclick="closeModal('project3-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="content-section">
+                    <h3>Project Overview</h3>
+                    <p> This project involved the implementation of a full state linearisation control law, aimed at controlling the slip coefficient ensuring optimal braking in different road conditions.</p>
+                    
+                    <div class="tech-tags">
+                        <span class="tech-tag">Simulink</span>
+                        <span class="tech-tag">Non-Linear Control</span>
+                        <span class="tech-tag">Control Systems</span>
+                    </div>
+                    
+                    <div class="project-details">
+                        <ul>
+                            <li><strong>Duration:</strong> 10 weeks </li>
+                            <li><strong>Role:</strong> Control System Designer</li>
+                            <li><strong>Category:</strong> Power Electronics & Systems Design</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Problem Statement</h3>
+                    <p>Traditional braking systems struggle to maintain optimal slip ratios across varying road conditions, leading to reduced braking efficiency and safety concerns.</p>
+                    
+                    <h4>Key Challenges</h4>
+                    <ul>
+                        <li>Simulation of system dynamics for non-linear system.</li>
+                        <li>Mathematical formulation of non-linear feedback linearisation law.</li>
+                        <li>Achieving optimal braking and meeting performance criteria for optimal braking coefficient.</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Methodology & Approach</h3>
+                    <p>Designed a line-interactive UPS topology with automatic voltage regulation, battery backup, and fast switching between mains and battery power.</p>
+                    
+                    <h4>Technical Implementation</h4>
+                    <ul>
+                        <li>Simulated system dynamics in Simulink.</li>
+                        <li> Develop system dynamics and apply Lie derivatives to find the linearised feedback control law.</li>
+                        <li> Use pole placement to control the performance of the car model to ensure performance criteria is met.</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Results & Analysis</h3>
+                    
+                    <div class="result-highlight">
+                        <strong>Key Achievement:</strong> The simulated model showed that the full state feedback controller was able to maintain the slip coefficient within optimal braking limits across varying road conditions, enhancing braking performance and safety. A 3 second breaking time with a braking distance of 41.69 m was achieved for a vehicle at 100 km/hr on a high friction road surface meeting performance criteria based on the Tesla Model S regenerative braking system which received a 5 star NCAP safety rating. A optimal 0.20 friction coefficient was maintained across varying road conditions.
+                    </div>
+                    
+                    <h4>Performance Metrics</h4>
+                    <ul>
+                        <li> Achieved a 3 second braking time for a car at 100.91 km/hr </li>
+                        <li> Achieved a 41.69 m braking distance</li>
+                        <li> Achieved a 0.20 slip ratio coefficient</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Close modal when clicking outside the content
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.getElementsByClassName('modal');
+                for (let i = 0; i < modals.length; i++) {
+                    if (modals[i].style.display === 'block') {
+                        modals[i].style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

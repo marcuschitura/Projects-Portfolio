@@ -92,3 +92,17 @@ h2 {
 .project-card a:hover {
     text-decoration: underline;
 }
+
+.profile-photo {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.profile-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
