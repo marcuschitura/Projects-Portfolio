@@ -351,6 +351,7 @@
             <button class="filter-btn" data-filter="networking">Networking</button>
             <button class="filter-btn" data-filter="control-systems">Control Systems</button>
             <button class="filter-btn" data-filter="power-electronics">Power Electronics</button>
+            <button class="filter-btn" data-filter="biomedical">Biomedical</button>
         </div>
     </div>
 
@@ -448,6 +449,38 @@ latency, full deadline adherence, and 100 % reliability across multiple network 
                 </div>
                 
                 <a href="#" class="project-link" data-project="project3">View Project Details</a>
+            </div>
+        </div>
+
+        <!-- PROJECT 4 - Wearable EMG Device -->
+        <div class="project-card" data-category="biomedical">
+            <div class="project-header">
+                <h2>Wearable EMG Device for Prosthetic Control</h2>
+                <div class="project-category">Biomedical Engineering & Signal Processing</div>
+            </div>
+            <div class="project-content">
+                <p><em>Design and implementation of a wearable electromyography (EMG) device for capturing muscle activity data to support gesture identification for a bionic hand used by amputees.</em></p>
+                
+                <div class="tech-tags">
+                    <span class="tech-tag">LTspice</span>
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">Signal Processing</span>
+                    <span class="tech-tag">Biomedical</span>
+                </div>
+                
+                <div class="project-details">
+                    <ul>
+                        <li><strong>Focus:</strong> Biomedical signal acquisition and processing</li>
+                        <li><strong>Duration:</strong> 12 weeks</li>
+                        <li><strong>Role:</strong> Lead Designer & Engineer</li>
+                    </ul>
+                </div>
+                
+                <div class="result-highlight">
+                    <strong>Key Result:</strong> The system successfully captured EMG signals within the target bandwidth of 2.99Hz to 468.89 Hz, with a fast response time of 0.8 seconds to reach steady state. The design proved cost-effective at R1665.80 while meeting key performance criteria for wearable prosthetic applications.
+                </div>
+                
+                <a href="#" class="project-link" data-project="project4">View Project Details</a>
             </div>
         </div>
     </section>
@@ -707,6 +740,96 @@ latency, full deadline adherence, and 100 % reliability across multiple network 
                         </a>
                         <a href="assets/code/feedback-linearisation.zip" class="download-btn">
                             Simulink Model File
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 4 Modal - Wearable EMG Device -->
+    <div id="project4-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Wearable EMG Device for Prosthetic Control</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="content-section">
+                    <h3>Project Overview</h3>
+                    <p>This project involved the design and implementation of a wearable electromyography (EMG) device for capturing muscle activity data to support gesture identification for a bionic hand used by amputees. The design follows guidelines from the Surface Electromyography for the Non-Invasive Assessment of Muscles (SENIAM) project and established biomedical standards.</p>
+                    
+                    <div class="tech-tags">
+                        <span class="tech-tag">LTspice</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">Signal Processing</span>
+                        <span class="tech-tag">Biomedical Engineering</span>
+                        <span class="tech-tag">Control Systems</span>
+                    </div>
+                    
+                    <div class="project-details">
+                        <ul>
+                            <li><strong>Duration:</strong> 12 weeks</li>
+                            <li><strong>Role:</strong> Lead Designer & Engineer</li>
+                            <li><strong>Category:</strong> Biomedical Electronics & Signal Processing</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Problem Statement</h3>
+                    <p>Traditional EMG systems for prosthetic control are often limited by their complexity, lack of portability, and susceptibility to motion artifacts. This project aimed to develop a wearable solution that addresses these limitations while maintaining accurate signal acquisition.</p>
+                    
+                    <h4>Key Challenges</h4>
+                    <ul>
+                        <li>Designing a system with high input impedance to interface with dry electrodes</li>
+                        <li>Implementing effective noise rejection for motion artifacts and electrical interference</li>
+                        <li>Creating a compact, wearable form factor suitable for daily use</li>
+                        <li>Ensuring compatibility with prosthetic control systems</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Methodology & Approach</h3>
+                    <p>The design employed a single-channel EMG configuration with differential signal acquisition for improved noise immunity. The system architecture included:</p>
+                    
+                    <h4>Technical Implementation</h4>
+                    <ul>
+                        <li>Ag-AgCl dry electrodes following SENIAM placement standards</li>
+                        <li>3 op-amp instrumentation amplifier with gain of 11 and CMRR of 100.827 dB</li>
+                        <li>Fourth-order Butterworth bandpass filter (20-500 Hz)</li>
+                        <li>Precision rectifier and envelope detector for signal conditioning</li>
+                        <li>Arduino Nano for signal processing with 1200 Hz sampling rate</li>
+                        <li>Bluetooth module for wireless data transmission</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Results & Analysis</h3>
+                    
+                    <div class="result-highlight">
+                        <strong>Key Achievement:</strong> The system successfully captured EMG signals within the target bandwidth of 2.99Hz to 468.89 Hz, with a fast response time of 0.8 seconds to reach steady state. The design proved cost-effective at R1665.80 while meeting key performance criteria for wearable prosthetic applications.
+                    </div>
+                    
+                    <h4>Performance Metrics</h4>
+                    <ul>
+                        <li>Input impedance: 10^12 Ω (OPA2604 op-amps)</li>
+                        <li>Common Mode Rejection Ratio: 100.827 dB</li>
+                        <li>Bandwidth: 2.99Hz - 468.89 Hz</li>
+                        <li>Sampling rate: 1200 Hz (meeting Nyquist criteria)</li>
+                        <li>Response time: 0.8 seconds to steady state</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Project Materials</h3>
+                    
+                    <div class="download-links">
+                        <a href="assets/pdfs/emg-device-report.pdf" class="download-btn" target="_blank">
+                            Project Report PDF
+                        </a>
+                        <a href="assets/code/emg-circuit-design.zip" class="download-btn">
+                            Circuit Design Files
                         </a>
                     </div>
                 </div>
