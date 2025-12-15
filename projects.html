@@ -1072,311 +1072,313 @@ latency, full deadline adherence, and 100 % reliability across multiple network 
     </div>
 
     <!-- PROJECT 6 MODAL - NEW: Audio Controlled Toy Car -->
-    <div id="project6-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Audio Controlled Remote Toy Car</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This project designed and implemented a microcontroller-free remote-controlled toy car operated through audio signals using DTMF tone detection. The system uses pure analog circuitry with LM567 tone detectors to decode specific audio frequencies for directional control.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">LM567 Tone Detectors</span>
-                        <span class="tech-tag">L298N Motor Driver</span>
-                        <span class="tech-tag">MAX9814 Microphone</span>
-                        <span class="tech-tag">Analog Circuit Design</span>
-                        <span class="tech-tag">DTMF Signal Processing</span>
-                        <span class="tech-tag">Custom NOR Gates</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 8-10 weeks</li>
-                            <li><strong>Role:</strong> Team Lead & Circuit Designer</li>
-                            <li><strong>Category:</strong> Control Systems & Embedded Design</li>
-                            <li><strong>Team Size:</strong> 3 members</li>
-                        </ul>
-                    </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Design a remote-controlled toy car using audio signals as control input, with immunity against interference from other teams' signals, without using any microcontrollers, and with strict power constraints (max 5V across DC motors).</p>
-                    
-                    <h4>Key Constraints</h4>
-                    <ul>
-                        <li>No microcontrollers allowed in design</li>
-                        <li>Control signal limited to 20Hz-20kHz audio range</li>
-                        <li>Maximum 10V supply for circuit, 5V across DC motors</li>
-                        <li>No modifications to issued chassis</li>
-                        <li>Immunity against other teams' control signals</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>The solution uses LM567 tone detectors configured to detect specific audio frequencies, with dual-tone activation for interference immunity. Custom NOR gates were built to process the logic signals.</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li><strong>Tone Detection:</strong> Four LM567 tone detectors set to frequencies: 1937Hz, 3635Hz, 4564Hz, and 7133Hz</li>
-                        <li><strong>Dual-Tone System:</strong> Pairs of tones required for each command (e.g., 1937Hz + 3635Hz = Forward)</li>
-                        <li><strong>Signal Processing:</strong> Custom-built NOR gates convert tone detector outputs to motor control signals</li>
-                        <li><strong>Motor Control:</strong> L298N motor driver with direct interface from NOR gate outputs</li>
-                        <li><strong>Audio Input:</strong> MAX9814 microphone module with 2Vpp amplitude and adjustable gain</li>
-                        <li><strong>Control Interface:</strong> Custom mobile app for generating control tones</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> Successfully completed the track course in 7.38 minutes with full immunity against other teams' signals, meeting all design constraints without using any microcontrollers.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li><strong>Track Completion Time:</strong> 7.38 minutes</li>
-                        <li><strong>Control Distance:</strong> ~1 meter with loud speaker</li>
-                        <li><strong>Optimal Tone Range:</strong> 3kHz - 6kHz</li>
-                        <li><strong>Immunity:</strong> Full immunity achieved through dual-tone system</li>
-                        <li><strong>Power Supply:</strong> 5V power bank (attempted 10V but caused jittery motion)</li>
-                    </ul>
-                    
-                    <h4>Control Scheme</h4>
-                    <ul>
-                        <li><strong>Forward:</strong> Tone A (1937Hz) + Tone B (3635Hz)</li>
-                        <li><strong>Right Turn:</strong> Tone A (1937Hz) + Tone C (4564Hz)</li>
-                        <li><strong>Left Turn:</strong> Tone B (3635Hz) + Tone C (4564Hz)</li>
-                        <li><strong>Reverse:</strong> Used instead of forward turning due to implementation constraints</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Design Evolution & Challenges</h3>
-                    <p>The project evolved through several design iterations:</p>
-                    
-                    <h4>Initial Approaches (Abandoned)</h4>
-                    <ul>
-                        <li>Analog filter bank with frequency-to-voltage converters</li>
-                        <li>FSK (Frequency Shift Keying) modulation</li>
-                        <li>ASK (Amplitude Shift Keying) modulation</li>
-                    </ul>
-                    
-                    <h4>Technical Challenges Overcome</h4>
-                    <ul>
-                        <li>Microphone sensitivity: Electret mic (20mV) → KY-038 module → MAX9814 (2Vpp)</li>
-                        <li>NOR gate inconsistency: 74LS02 IC → custom-built NOR gates</li>
-                        <li>Speed control: XL600L DC-DC boost converter attempted but abandoned</li>
-                        <li>High frequency harmonics: Discarded 7133Hz tone due to harmonic interference</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Cost Analysis & Future Improvements</h3>
-                    
-                    <h4>Total Cost: R930.00</h4>
-                    <ul>
-                        <li>LM567 Tone Detectors (4×): R120</li>
-                        <li>MAX9814 Microphone (2×): R208</li>
-                        <li>XL600L Boost Converter: R140</li>
-                        <li>Power Banks: R470</li>
-                    </ul>
-                    
-                    <h4>Recommended Improvements</h4>
-                    <ul>
-                        <li>Use XE2211 IC (two logic outputs per IC) to reduce cost</li>
-                        <li>Build custom MOSFET H-bridge instead of L298N for better efficiency</li>
-                        <li>Implement forward turning capability</li>
-                        <li>Increase control range with better audio amplification</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Project Materials</h3>
-                    
-                    <div class="download-links">
-                        <a href="assets/pdfs/audio-controlled-remote-toy-car.pdf" class="download-btn" target="_blank">
-                            Project Report PDF
-                        </a>          
-                    </div>
-                </div>
-            </div>
+<div id="project6-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Audio Controlled Remote Toy Car</h2>
+            <button class="close-modal">&times;</button>
         </div>
-    </div>
+        <div class="modal-body">
+            <div class="content-section">
+                <h3>Project Overview</h3>
+                <p>This project designed and implemented a microcontroller-free remote-controlled toy car operated through audio signals using DTMF tone detection. The system uses pure analog circuitry with LM567 tone detectors to decode specific audio frequencies for directional control.</p>
+                
+                <div class="tech-tags">
+                    <span class="tech-tag">LM567 Tone Detectors</span>
+                    <span class="tech-tag">L298N Motor Driver</span>
+                    <span class="tech-tag">MAX9814 Microphone</span>
+                    <span class="tech-tag">Analog Circuit Design</span>
+                    <span class="tech-tag">DTMF Signal Processing</span>
+                    <span class="tech-tag">Custom NOR Gates</span>
+                </div>
+                
+                <div class="project-details">
+                    <ul>
+                        <li><strong>Duration:</strong> 8-10 weeks</li>
+                        <li><strong>Role:</strong> Team Lead & Circuit Designer</li>
+                        <li><strong>Category:</strong> Control Systems & Embedded Design</li>
+                        <li><strong>Team Size:</strong> 3 members</li>
+                    </ul>
+                </div>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Problem Statement</h3>
+                <p>Design a remote-controlled toy car using audio signals as control input, with immunity against interference from other teams' signals, without using any microcontrollers, and with strict power constraints (max 5V across DC motors).</p>
+                
+                <h4>Key Constraints</h4>
+                <ul>
+                    <li>No microcontrollers allowed in design</li>
+                    <li>Control signal limited to 20Hz-20kHz audio range</li>
+                    <li>Maximum 10V supply for circuit, 5V across DC motors</li>
+                    <li>No modifications to issued chassis</li>
+                    <li>Immunity against other teams' control signals</li>
+                </ul>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Methodology & Approach</h3>
+                <p>The solution uses LM567 tone detectors configured to detect specific audio frequencies, with dual-tone activation for interference immunity. Custom NOR gates were built to process the logic signals.</p>
+                
+                <h4>Technical Implementation</h4>
+                <ul>
+                    <li><strong>Tone Detection:</strong> Four LM567 tone detectors set to frequencies: 1937Hz, 3635Hz, 4564Hz, and 7133Hz</li>
+                    <li><strong>Dual-Tone System:</strong> Pairs of tones required for each command (e.g., 1937Hz + 3635Hz = Forward)</li>
+                    <li><strong>Signal Processing:</strong> Custom-built NOR gates convert tone detector outputs to motor control signals</li>
+                    <li><strong>Motor Control:</strong> L298N motor driver with direct interface from NOR gate outputs</li>
+                    <li><strong>Audio Input:</strong> MAX9814 microphone module with 2Vpp amplitude and adjustable gain</li>
+                    <li><strong>Control Interface:</strong> Custom mobile app for generating control tones</li>
+                </ul>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Results & Analysis</h3>
+                
+                <div class="result-highlight">
+                    <strong>Key Achievement:</strong> Successfully completed the track course in 7.38 minutes with full immunity against other teams' signals, meeting all design constraints without using any microcontrollers.
+                </div>
+                
+                <h4>Performance Metrics</h4>
+                <ul>
+                    <li><strong>Track Completion Time:</strong> 7.38 minutes</li>
+                    <li><strong>Control Distance:</strong> ~1 meter with loud speaker</li>
+                    <li><strong>Optimal Tone Range:</strong> 3kHz - 6kHz</li>
+                    <li><strong>Immunity:</strong> Full immunity achieved through dual-tone system</li>
+                    <li><strong>Power Supply:</strong> 5V power bank (attempted 10V but caused jittery motion)</li>
+                </ul>
+                
+                <h4>Control Scheme</h4>
+                <ul>
+                    <li><strong>Forward:</strong> Tone A (1937Hz) + Tone B (3635Hz)</li>
+                    <li><strong>Right Turn:</strong> Tone A (1937Hz) + Tone C (4564Hz)</li>
+                    <li><strong>Left Turn:</strong> Tone B (3635Hz) + Tone C (4564Hz)</li>
+                    <li><strong>Reverse:</strong> Used instead of forward turning due to implementation constraints</li>
+                </ul>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Design Evolution & Challenges</h3>
+                <p>The project evolved through several design iterations:</p>
+                
+                <h4>Initial Approaches (Abandoned)</h4>
+                <ul>
+                    <li>Analog filter bank with frequency-to-voltage converters</li>
+                    <li>FSK (Frequency Shift Keying) modulation</li>
+                    <li>ASK (Amplitude Shift Keying) modulation</li>
+                </ul>
+                
+                <h4>Technical Challenges Overcome</h4>
+                <ul>
+                    <li>Microphone sensitivity: Electret mic (20mV) → KY-038 module → MAX9814 (2Vpp)</li>
+                    <li>NOR gate inconsistency: 74LS02 IC → custom-built NOR gates</li>
+                    <li>Speed control: XL600L DC-DC boost converter attempted but abandoned</li>
+                    <li>High frequency harmonics: Discarded 7133Hz tone due to harmonic interference</li>
+                </ul>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Cost Analysis & Future Improvements</h3>
+                
+                <h4>Total Cost: R930.00</h4>
+                <ul>
+                    <li>LM567 Tone Detectors (4×): R120</li>
+                    <li>MAX9814 Microphone (2×): R208</li>
+                    <li>XL600L Boost Converter: R140</li>
+                    <li>Power Banks: R470</li>
+                </ul>
+                
+                <h4>Recommended Improvements</h4>
+                <ul>
+                    <li>Use XE2211 IC (two logic outputs per IC) to reduce cost</li>
+                    <li>Build custom MOSFET H-bridge instead of L298N for better efficiency</li>
+                    <li>Implement forward turning capability</li>
+                    <li>Increase control range with better audio amplification</li>
+                </ul>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Project Materials</h3>
+                
+                <div class="download-links">
+                    <a href="assets/pdfs/audio-controlled-remote-toy-car.pdf" class="download-btn" target="_blank">
+                        Project Report PDF
+                    </a>          
+                </div>
+            </div> <!-- Close content-section -->
+        </div> <!-- Close modal-body -->
+    </div> <!-- Close modal-content -->
+</div> <!-- Close project6-modal -->
 
-    <!-- PROJECT 7 MODAL - NEW: Automated Sorting System -->
-    <div id="project7-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Automated Pallet Sorting System</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This project implemented an automated pallet sorting system using Siemens S7-1200 PLC programmed with ladder logic (IEC 61131-3). The system detects, classifies by height, tracks, and routes pallets using deterministic control logic with fault tolerance in the Factory I/O simulation environment.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">Siemens TIA Portal</span>
-                        <span class="tech-tag">Ladder Logic</span>
-                        <span class="tech-tag">Factory I/O</span>
-                        <span class="tech-tag">PLC Programming</span>
-                        <span class="tech-tag">Industrial Automation</span>
-                        <span class="tech-tag">IEC 61131-3</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 1 week</li>
-                            <li><strong>Role:</strong> PLC Programmer & Systems Engineer</li>
-                            <li><strong>Category:</strong> Control Systems & Industrial Automation</li>
-                            <li><strong>Platform:</strong> Siemens S7-1200 PLC</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Design and implement a deterministic, fault-tolerant control system for automated pallet sorting that operates reliably in industrial environments, with proper tracking, classification, and routing logic.</p>
-                    
-                    <h4>Key Requirements</h4>
-                    <ul>
-                        <li>Pallet detection and entry handling</li>
-                        <li>Height classification (low/high)</li>
-                        <li>Position tracking through the system</li>
-                        <li>Deterministic routing to left/right conveyors</li>
-                        <li>Fault-tolerant emergency stop system</li>
-                        <li>Production counting and validation</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>The system was designed using memory-based decision storage rather than real-time sensor dependency, with shift-bit tracking for pallet position and deterministic control logic.</p>
-                    
-                    <h4>System Architecture</h4>
-                    <ul>
-                        <li><strong>Control Logic:</strong> Ladder logic (IEC 61131-3) programmed in Siemens TIA Portal</li>
-                        <li><strong>Simulation Environment:</strong> Factory I/O for realistic industrial simulation</li>
-                        <li><strong>Memory Structure:</strong> Decision storage in memory bits for independence from sensor states</li>
-                        <li><strong>Tracking Method:</strong> Shift-left instructions for logical pallet tracking</li>
-                        <li><strong>Safety System:</strong> Emergency stop overrides all motion commands</li>
-                    </ul>
-                    
-                    <h4>Key Engineering Decisions</h4>
-                    <ul>
-                        <li>Memory bits store decisions instead of relying on real-time sensor states</li>
-                        <li>Edge detection prevents repeated actions within single pallet cycles</li>
-                        <li>Logical tracking (bit shifting) improves robustness and scalability</li>
-                        <li>Interlocks centralize logic operation safety</li>
-                        <li>Timer-controlled turntable rotation for consistent mechanical motion</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>System Logic Breakdown</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Core Control Principle:</strong> The system uses stored decisions rather than real-time sensor dependency, making it deterministic and fault-tolerant.
-                    </div>
-                    
-                    <h4>Functional Modules</h4>
-                    <ul>
-                        <li><strong>Start/Stop Control:</strong> Latched memory bit controls all downstream logic with emergency stop override</li>
-                        <li><strong>Pallet Detection:</strong> Optical and proximity sensors with debouncing logic</li>
-                        <li><strong>Height Classification:</strong> Low and high optical sensors with Set/Reset logic for decision storage</li>
-                        <li><strong>Pallet Tracking:</strong> Shift-left instruction moves bit through storage byte as pallet advances</li>
-                        <li><strong>Turntable Control:</strong> Timer-controlled rotation with TOTALLY ROTATED memory bit</li>
-                        <li><strong>Conveyor Routing:</strong> Exclusive actuation based on stored height decision and pallet position</li>
-                        <li><strong>Production Counting:</strong> Counters with edge case prevention for accurate tracking</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Technical Implementation Details</h3>
-                    
-                    <h4>1. Pallet Detection & Entry Handling</h4>
-                    <ul>
-                        <li>Optical sensors detect pallet presence</li>
-                        <li>Debouncing logic prevents multiple triggers</li>
-                        <li>Feeder and entry conveyors coordinate for smooth entry</li>
-                    </ul>
-                    
-                    <h4>2. Height Classification System</h4>
-                    <ul>
-                        <li>Low and high optical sensors classify each pallet</li>
-                        <li>Classification result stored in decision memory using Set/Reset logic</li>
-                        <li>Preserves decision even after pallet leaves sensing zone</li>
-                        <li>Avoids scan cycle dependency</li>
-                    </ul>
-                    
-                    <h4>3. Pallet Tracking Implementation</h4>
-                    <ul>
-                        <li>Shift-left instruction moves bit through 8-bit storage byte</li>
-                        <li>Each pallet advancement triggers bit shift</li>
-                        <li>Logical tracking independent of physical sensor reliability</li>
-                        <li>Improves system robustness</li>
-                    </ul>
-                    
-                    <h4>4. Turntable Control Logic</h4>
-                    <ul>
-                        <li>Timer controls turn motor for fixed duration</li>
-                        <li>TOTALLY ROTATED memory bit set upon completion</li>
-                        <li>Guarantees consistent mechanical motion</li>
-                        <li>Independent of sensor noise or delays</li>
-                    </ul>
-                    
-                    <h4>5. Conveyor Routing System</h4>
-                    <ul>
-                        <li>Activation based on stored height decision and pallet position</li>
-                        <li>Interlocks prevent simultaneous left/right conveyor actuation</li>
-                        <li>Exclusive and deterministic routing</li>
-                        <li>Memory-based rather than sensor-based decisions</li>
-                    </ul>
-                    
-                    <h4>6. Production Counting & Validation</h4>
-                    <ul>
-                        <li>Counters track processed pallets</li>
-                        <li>Additional logic prevents double counting</li>
-                        <li>Provides production feedback</li>
-                        <li>Validates correct system behavior</li>
-                    </ul>
-                </div>
-
-                <div class="content-section">
-                    <h3>Project Demonstration</h3>
-                    
-                    <div class="video-container">
-                        <video controls>
-                            <source src="assets/videos/sorting-system-demo.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <p class="video-caption">Factory I/O simulation demonstrating the automated pallet sorting system operation.</p>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Project Materials</h3>
-                    
-                    <div class="download-links">
-                        <a href="assets/pdfs/sorting-system.pdf" class="download-btn" target="_blank">
-                            Project Report PDF
-                        </a>
-                        <a href="assets/pdfs/sorting-ladder-logic.pdf" class="download-btn" target="_blank">
-                            Ladder Logic Diagram
-                        </a>
-                        <a href="assets/videos/Factory-IO-demo.mp4" class="download-btn" target="_blank">
-                            System Demo Video
-                        </a>
-                    </div>
-                </div>
-            </div>
+<!-- PROJECT 7 MODAL - NEW: Automated Sorting System -->
+<div id="project7-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Automated Pallet Sorting System</h2>
+            <button class="close-modal">&times;</button>
         </div>
-    </div>
+        <div class="modal-body">
+            <div class="content-section">
+                <h3>Project Overview</h3>
+                <p>This project implemented an automated pallet sorting system using Siemens S7-1200 PLC programmed with ladder logic (IEC 61131-3). The system detects, classifies by height, tracks, and routes pallets using deterministic control logic with fault tolerance in the Factory I/O simulation environment.</p>
+                
+                <div class="tech-tags">
+                    <span class="tech-tag">Siemens TIA Portal</span>
+                    <span class="tech-tag">Ladder Logic</span>
+                    <span class="tech-tag">Factory I/O</span>
+                    <span class="tech-tag">PLC Programming</span>
+                    <span class="tech-tag">Industrial Automation</span>
+                    <span class="tech-tag">IEC 61131-3</span>
+                </div>
+                
+                <div class="project-details">
+                    <ul>
+                        <li><strong>Duration:</strong> 1 week</li>
+                        <li><strong>Role:</strong> PLC Programmer & Systems Engineer</li>
+                        <li><strong>Category:</strong> Control Systems & Industrial Automation</li>
+                        <li><strong>Platform:</strong> Siemens S7-1200 PLC</li>
+                    </ul>
+                </div>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Problem Statement</h3>
+                <p>Design and implement a deterministic, fault-tolerant control system for automated pallet sorting that operates reliably in industrial environments, with proper tracking, classification, and routing logic.</p>
+                
+                <h4>Key Requirements</h4>
+                <ul>
+                    <li>Pallet detection and entry handling</li>
+                    <li>Height classification (low/high)</li>
+                    <li>Position tracking through the system</li>
+                    <li>Deterministic routing to left/right conveyors</li>
+                    <li>Fault-tolerant emergency stop system</li>
+                    <li>Production counting and validation</li>
+                </ul>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Methodology & Approach</h3>
+                <p>The system was designed using memory-based decision storage rather than real-time sensor dependency, with shift-bit tracking for pallet position and deterministic control logic.</p>
+                
+                <h4>System Architecture</h4>
+                <ul>
+                    <li><strong>Control Logic:</strong> Ladder logic (IEC 61131-3) programmed in Siemens TIA Portal</li>
+                    <li><strong>Simulation Environment:</strong> Factory I/O for realistic industrial simulation</li>
+                    <li><strong>Memory Structure:</strong> Decision storage in memory bits for independence from sensor states</li>
+                    <li><strong>Tracking Method:</strong> Shift-left instructions for logical pallet tracking</li>
+                    <li><strong>Safety System:</strong> Emergency stop overrides all motion commands</li>
+                </ul>
+                
+                <h4>Key Engineering Decisions</h4>
+                <ul>
+                    <li>Memory bits store decisions instead of relying on real-time sensor states</li>
+                    <li>Edge detection prevents repeated actions within single pallet cycles</li>
+                    <li>Logical tracking (bit shifting) improves robustness and scalability</li>
+                    <li>Interlocks centralize logic operation safety</li>
+                    <li>Timer-controlled turntable rotation for consistent mechanical motion</li>
+                </ul>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>System Logic Breakdown</h3>
+                
+                <div class="result-highlight">
+                    <strong>Core Control Principle:</strong> The system uses stored decisions rather than real-time sensor dependency, making it deterministic and fault-tolerant.
+                </div>
+                
+                <h4>Functional Modules</h4>
+                <ul>
+                    <li><strong>Start/Stop Control:</strong> Latched memory bit controls all downstream logic with emergency stop override</li>
+                    <li><strong>Pallet Detection:</strong> Optical and proximity sensors with debouncing logic</li>
+                    <li><strong>Height Classification:</strong> Low and high optical sensors with Set/Reset logic for decision storage</li>
+                    <li><strong>Pallet Tracking:</strong> Shift-left instruction moves bit through storage byte as pallet advances</li>
+                    <li><strong>Turntable Control:</strong> Timer-controlled rotation with TOTALLY ROTATED memory bit</li>
+                    <li><strong>Conveyor Routing:</strong> Exclusive actuation based on stored height decision and pallet position</li>
+                    <li><strong>Production Counting:</strong> Counters with edge case prevention for accurate tracking</li>
+                </ul>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Technical Implementation Details</h3>
+                
+                <h4>1. Pallet Detection & Entry Handling</h4>
+                <ul>
+                    <li>Optical sensors detect pallet presence</li>
+                    <li>Debouncing logic prevents multiple triggers</li>
+                    <li>Feeder and entry conveyors coordinate for smooth entry</li>
+                </ul>
+                
+                <h4>2. Height Classification System</h4>
+                <ul>
+                    <li>Low and high optical sensors classify each pallet</li>
+                    <li>Classification result stored in decision memory using Set/Reset logic</li>
+                    <li>Preserves decision even after pallet leaves sensing zone</li>
+                    <li>Avoids scan cycle dependency</li>
+                </ul>
+                
+                <h4>3. Pallet Tracking Implementation</h4>
+                <ul>
+                    <li>Shift-left instruction moves bit through 8-bit storage byte</li>
+                    <li>Each pallet advancement triggers bit shift</li>
+                    <li>Logical tracking independent of physical sensor reliability</li>
+                    <li>Improves system robustness</li>
+                </ul>
+                
+                <h4>4. Turntable Control Logic</h4>
+                <ul>
+                    <li>Timer controls turn motor for fixed duration</li>
+                    <li>TOTALLY ROTATED memory bit set upon completion</li>
+                    <li>Guarantees consistent mechanical motion</li>
+                    <li>Independent of sensor noise or delays</li>
+                </ul>
+                
+                <h4>5. Conveyor Routing System</h4>
+                <ul>
+                    <li>Activation based on stored height decision and pallet position</li>
+                    <li>Interlocks prevent simultaneous left/right conveyor actuation</li>
+                    <li>Exclusive and deterministic routing</li>
+                    <li>Memory-based rather than sensor-based decisions</li>
+                </ul>
+                
+                <h4>6. Production Counting & Validation</h4>
+                <ul>
+                    <li>Counters track processed pallets</li>
+                    <li>Additional logic prevents double counting</li>
+                    <li>Provides production feedback</li>
+                    <li>Validates correct system behavior</li>
+                </ul>
+            </div> <!-- Close content-section -->
+
+            <div class="content-section">
+                <h3>Project Demonstration</h3>
+                
+                <div class="video-container">
+                    <video controls>
+                        <source src="assets/videos/sorting-system-demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p class="video-caption">Factory I/O simulation demonstrating the automated pallet sorting system operation.</p>
+            </div> <!-- Close content-section -->
+            
+            <div class="content-section">
+                <h3>Project Materials</h3>
+                
+                <div class="download-links">
+                    <a href="assets/pdfs/sorting-system.pdf" class="download-btn" target="_blank">
+                        Project Report PDF
+                    </a>
+                    <a href="assets/pdfs/sorting-ladder-logic.pdf" class="download-btn" target="_blank">
+                        Ladder Logic Diagram
+                    </a>
+                    <a href="assets/videos/Factory-IO-demo.mp4" class="download-btn" target="_blank">
+                        System Demo Video
+                    </a>
+                </div>
+            </div> <!-- Close content-section -->
+        </div> <!-- Close modal-body -->
+    </div> <!-- Close modal-content -->
+</div> <!-- Close project7-modal -->
+
 
     <script>
         // Filter functionality
@@ -1417,6 +1419,14 @@ latency, full deadline adherence, and 100 % reliability across multiple network 
                 button.closest('.modal').style.display = 'none';
             });
         });
+
+        document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.style.display = 'none';
+        });
+    }
+});
         
         // Close modal when clicking outside
         window.addEventListener('click', (e) => {
