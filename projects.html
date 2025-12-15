@@ -1358,7 +1358,7 @@ latency, full deadline adherence, and 100 % reliability across multiple network 
                         Ladder Logic Diagram
                     </a>
                     <a href="assets/videos/Factory-IO-demo.mp4" class="download-btn" target="_blank">
-                        System Demo Video
+                        Factory I/O Demonstration
                     </a>
                 </div>
             </div> <!-- Close content-section -->
@@ -1401,21 +1401,29 @@ latency, full deadline adherence, and 100 % reliability across multiple network 
             });
         });
         
+        // Close modal functionality
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+        
+        // Close modal when clicking close button
         document.querySelectorAll('.close-modal').forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
                 button.closest('.modal').style.display = 'none';
             });
         });
 
+        // Close modal when pressing Escape
         document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.style.display = 'none';
+            if (e.key === 'Escape') {
+                closeAllModals();
+            }
         });
-    }
-});
         
-        // Close modal when clicking outside
+        // Close modal when clicking outside modal content
         window.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) {
                 e.target.style.display = 'none';
