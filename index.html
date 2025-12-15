@@ -683,6 +683,8 @@
             <h1>Marcus Chitura</h1>
             <p class="title">Graduate Electrical Engineer</p>
             <p class="tagline">Designing efficient solutions to complex engineering problems</p>
+            <div class="scroll-indicator" onclick="scrollToAbout()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
@@ -706,6 +708,8 @@
                     <span class="skill-tag" data-skill="python">Python</span>
                     <span class="skill-tag" data-skill="ltspice">LTspice</span>
                     <span class="skill-tag" data-skill="arduino">Arduino</span>
+                    <span class="skill-tag" data-skill="plc">PLC Programming</span>
+                    <span class="skill-tag" data-skill="embedded">Embedded Systems</span>
                 </div>
                 
                 <div id="skill-details" class="skill-details">
@@ -713,9 +717,9 @@
                 </div>
                 
                 <div class="links">
-                    <a href="https://www.linkedin.com/in/marcus-chitura-429491245/" class="link-btn">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/marcus-chitura-429491245/" class="link-btn" target="_blank">LinkedIn</a>
                     <a href="assets/your-resume.pdf" class="link-btn secondary">Resume</a>
-                    <a href="projects.html" class="link-btn">Project Portfolio</a>
+                    <a href="projects.html" class="link-btn">View All Projects</a>
                 </div>
             </div>
             
@@ -739,6 +743,17 @@
                 </div>
             </div>
             
+            <div class="project-preview" onclick="openModal('project5-modal')">
+                <div class="project-image">
+                    <img src="assets/images/hand-motion-system.jpg" alt="Hand Motion Measurement System">
+                </div>
+                <div class="project-info">
+                    <h3>Hand Motion Measurement System</h3>
+                    <p>Hall effect sensor system for stroke rehabilitation monitoring with real-time feedback.</p>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+            </div>
+            
             <div class="project-preview" onclick="openModal('project1-modal')">
                 <div class="project-image">
                     <img src="assets/images/5g-network.jpg" alt="Edge Computation in 5G IAB Networks">
@@ -750,24 +765,13 @@
                 </div>
             </div>
             
-            <div class="project-preview" onclick="openModal('project2-modal')">
+            <div class="project-preview" onclick="openModal('project6-modal')">
                 <div class="project-image">
-                    <img src="assets/images/footbridge-vibration.jpg" alt="Footbridge Active Vibration Control">
+                    <img src="assets/images/audio-controlled-car.jpg" alt="Audio Controlled Remote Toy Car">
                 </div>
                 <div class="project-info">
-                    <h3>Footbridge Active Vibration Control</h3>
-                    <p>Designing an LQR controller to suppress vibrations in a structural system.</p>
-                    <a href="#" class="project-link">View Project →</a>
-                </div>
-            </div>
-            
-            <div class="project-preview" onclick="openModal('project3-modal')">
-                <div class="project-image">
-                    <img src="assets/images/ev-braking-system.jpg" alt="EV Braking System Control">
-                </div>
-                <div class="project-info">
-                    <h3>EV Braking System Control</h3>
-                    <p>Full state feedback controller implementation for optimal braking in electric vehicles.</p>
+                    <h3>Audio Controlled Toy Car</h3>
+                    <p>Microcontroller-free remote control using DTMF tone detection and analog circuitry.</p>
                     <a href="#" class="project-link">View Project →</a>
                 </div>
             </div>
@@ -776,7 +780,7 @@
     
     <footer>
         <p>© 2023 Marcus Chitura | Graduate Electrical Engineer</p>
-        <p style="margin-top: 0.5rem; opacity: 0.8;">Designed with attention to detail and engineering principles</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">7 Technical Projects | Control Systems | Biomedical Engineering | Network Optimization</p>
     </footer>
 
     <!-- EMG Device Modal -->
@@ -801,7 +805,7 @@
                     
                     <div class="project-details">
                         <ul>
-                            <li><strong>Duration:</strong> 12 weeks</li>
+                            <li><strong>Duration:</strong> 6 weeks</li>
                             <li><strong>Role:</strong> Lead Designer & Engineer</li>
                             <li><strong>Category:</strong> Biomedical Electronics & Signal Processing</li>
                         </ul>
@@ -852,11 +856,17 @@
                         <li>Response time: 0.8 seconds to steady state</li>
                     </ul>
                 </div>
+                
+                <div class="content-section">
+                    <div class="links">
+                        <a href="projects.html#project4" class="link-btn">View Full Project Details</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Project 1 Modal -->
+    <!-- Project 1 Modal (Edge Computation in 5G) -->
     <div id="project1-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -866,185 +876,102 @@
             <div class="modal-body">
                 <div class="content-section">
                     <h3>Project Overview</h3>
-                    <p>This project focused on optimizing task offloading in 5G Integrated Access and Backhaul (IAB) networks to minimize latency and energy consumption at the network edge.</p>
+                    <p>This research project focused on optimising task offloading strategies in 5G Integrated Access and Backhaul (IAB) networks to minimize latency and energy consumption for edge computing applications.</p>
                     
                     <div class="tech-tags">
                         <span class="tech-tag">5G Networks</span>
                         <span class="tech-tag">Edge Computing</span>
                         <span class="tech-tag">Optimization</span>
                         <span class="tech-tag">MATLAB</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 12 weeks</li>
-                            <li><strong>Role:</strong> Network Optimization Engineer</li>
-                            <li><strong>Category:</strong> Communication Systems</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>5G networks with IAB architecture face challenges in efficiently distributing computational tasks between edge devices and central servers, leading to increased latency and energy consumption.</p>
-                    
-                    <h4>Key Challenges</h4>
-                    <ul>
-                        <li>Developing an efficient task offloading algorithm for IAB networks</li>
-                        <li>Balancing computational load between edge and central resources</li>
-                        <li>Minimizing both latency and energy consumption</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>Developed a multi-objective optimization algorithm that considers network conditions, computational requirements, and energy constraints to determine optimal task offloading strategies.</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li>Modeled 5G IAB network architecture in MATLAB</li>
-                        <li>Implemented a genetic algorithm for task offloading optimization</li>
-                        <li>Evaluated performance under varying network conditions</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> The optimization algorithm reduced average task completion latency by 32% and energy consumption by 28% compared to traditional offloading approaches.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li>32% reduction in average task completion latency</li>
-                        <li>28% reduction in energy consumption</li>
-                        <li>Improved network resource utilization by 45%</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Project 2 Modal -->
-    <div id="project2-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Footbridge Active Vibration Control</h2>
-                <button class="close-modal" onclick="closeModal('project2-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This project involved designing and implementing a Linear Quadratic Regulator (LQR) controller to actively suppress vibrations in footbridge structures, improving safety and comfort.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">Control Systems</span>
-                        <span class="tech-tag">LQR Controller</span>
-                        <span class="tech-tag">Vibration Analysis</span>
-                        <span class="tech-tag">Simulink</span>
+                        <span class="tech-tag">Network Simulation</span>
                     </div>
                     
                     <div class="project-details">
                         <ul>
                             <li><strong>Duration:</strong> 8 weeks</li>
-                            <li><strong>Role:</strong> Control Systems Engineer</li>
-                            <li><strong>Category:</strong> Structural Control</li>
+                            <li><strong>Role:</strong> Researcher & Developer</li>
+                            <li><strong>Category:</strong> Networking & Edge Computing</li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="content-section">
                     <h3>Problem Statement</h3>
-                    <p>Footbridges can experience excessive vibrations due to pedestrian loading, wind, and other environmental factors, leading to discomfort and potential structural issues.</p>
+                    <p>Existing computation offloading methods are ineffective for 5G mmWave IAB networks because they assume stable links and simple topologies. They fail to dynamically adapt to the real-world challenges of volatile mmWave signals, the energy cost of multi-hop routing, and congestion in a shared wireless backhaul.</p>
                     
                     <h4>Key Challenges</h4>
                     <ul>
-                        <li>Modeling footbridge dynamics accurately</li>
-                        <li>Designing a controller that can handle multiple vibration modes</li>
-                        <li>Implementing the controller in a real-time system</li>
+                        <li>Energy efficiency in multi-hop network topologies</li>
+                        <li>Conflicting quality of service requirements across different 5G network slices</li>
+                        <li>Computational complexity for real time decision making</li>
+                        <li>Designing an algorithm complex enough to be effective yet simple enough for polynomial-time execution</li>
                     </ul>
                 </div>
                 
                 <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>Developed a state-space model of the footbridge and designed an LQR controller to minimize vibrations while considering control effort constraints.</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li>Created a finite element model of the footbridge structure</li>
-                        <li>Designed an LQR controller with optimal weighting matrices</li>
-                        <li>Simulated the controlled system in Simulink</li>
-                        <li>Implemented the controller on a real-time embedded system</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
+                    <h3>Key Results</h3>
                     
                     <div class="result-highlight">
-                        <strong>Key Achievement:</strong> The LQR controller successfully reduced vibration amplitudes by up to 85% across multiple vibration modes, significantly improving pedestrian comfort.
+                        <strong>Key Achievement:</strong> The proposed multi-objective algorithm maintains a balanced trade-off between energy efficiency (89.3%) and offloading rate (43.9%) while achieving minimal latency, full deadline adherence, and 100% reliability across multiple network slices.
                     </div>
                     
                     <h4>Performance Metrics</h4>
                     <ul>
-                        <li>85% reduction in vibration amplitudes</li>
-                        <li>Effective control across first three vibration modes</li>
-                        <li>Real-time implementation with minimal computational overhead</li>
+                        <li>Energy efficiency: 89.3%</li>
+                        <li>Offloading rate: 43.9%</li>
+                        <li>Minimal latency achieved across tasks</li>
+                        <li>100% reliability across network slices</li>
                     </ul>
+                </div>
+                
+                <div class="content-section">
+                    <div class="links">
+                        <a href="projects.html#project1" class="link-btn">View Full Project Details</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Project 3 Modal -->
-    <div id="project3-modal" class="modal">
+    <!-- Project 5 Modal (Hand Motion Measurement System) -->
+    <div id="project5-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Application of Full State Feedback Controller on a Non-Linear Braking System for EV</h2>
-                <button class="close-modal" onclick="closeModal('project3-modal')">&times;</button>
+                <h2>Hand Motion Measurement System for Stroke Rehabilitation</h2>
+                <button class="close-modal" onclick="closeModal('project5-modal')">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="content-section">
                     <h3>Project Overview</h3>
-                    <p> This project involved the implementation of a full state linearisation control law, aimed at controlling the slip coefficient ensuring optimal braking in different road conditions.</p>
+                    <p>This project involved the design, construction, and testing of a displacement measurement system to monitor hand motion capability for stroke rehabilitation. The system uses a Hall effect sensor to detect hand displacement and classifies movement as "adequate" or "insufficient" based on clinical thresholds.</p>
                     
                     <div class="tech-tags">
-                        <span class="tech-tag">Simulink</span>
-                        <span class="tech-tag">Non-Linear Control</span>
-                        <span class="tech-tag">Control Systems</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">Hall Effect Sensor</span>
+                        <span class="tech-tag">Biomedical Engineering</span>
+                        <span class="tech-tag">Measurement Systems</span>
+                        <span class="tech-tag">Signal Processing</span>
                     </div>
                     
                     <div class="project-details">
                         <ul>
-                            <li><strong>Duration:</strong> 10 weeks </li>
-                            <li><strong>Role:</strong> Control System Designer</li>
-                            <li><strong>Category:</strong> Power Electronics & Systems Design</li>
+                            <li><strong>Duration:</strong> 8-10 weeks</li>
+                            <li><strong>Role:</strong> Lead Designer & System Integrator</li>
+                            <li><strong>Category:</strong> Biomedical Engineering & Measurement Systems</li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="content-section">
                     <h3>Problem Statement</h3>
-                    <p>Traditional braking systems struggle to maintain optimal slip ratios across varying road conditions, leading to reduced braking efficiency and safety concerns.</p>
+                    <p>Stroke rehabilitation requires accurate monitoring of motor recovery progress, particularly in hand function. Existing solutions are often complex and expensive. This project aimed to create a cost-effective displacement measurement system that clinicians could use to characterize rehabilitation progress for stroke patients.</p>
                     
-                    <h4>Key Challenges</h4>
+                    <h4>Key Features</h4>
                     <ul>
-                        <li>Simulation of system dynamics for non-linear system.</li>
-                        <li>Mathematical formulation of non-linear feedback linearisation law.</li>
-                        <li>Achieving optimal braking and meeting performance criteria for optimal braking coefficient.</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>Designed a line-interactive UPS topology with automatic voltage regulation, battery backup, and fast switching between mains and battery power.</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li>Simulated system dynamics in Simulink.</li>
-                        <li> Develop system dynamics and apply Lie derivatives to find the linearised feedback control law.</li>
-                        <li> Use pole placement to control the performance of the car model to ensure performance criteria is met.</li>
+                        <li>Non-invasive hand motion monitoring using Hall effect sensor</li>
+                        <li>Real-time displacement measurement (10-40mm range)</li>
+                        <li>Movement classification: "ADQ" (Adequate) vs "INS" (Insufficient)</li>
+                        <li>Cost-effective solution for clinical rehabilitation</li>
                     </ul>
                 </div>
                 
@@ -1052,15 +979,92 @@
                     <h3>Results & Analysis</h3>
                     
                     <div class="result-highlight">
-                        <strong>Key Achievement:</strong> The simulated model showed that the full state feedback controller was able to maintain the slip coefficient within optimal braking limits across varying road conditions, enhancing braking performance and safety. A 3 second breaking time with a braking distance of 41.69 m was achieved for a vehicle at 100 km/hr on a high friction road surface meeting performance criteria based on the Tesla Model S regenerative braking system which received a 5 star NCAP safety rating. A optimal 0.20 friction coefficient was maintained across varying road conditions.
+                        <strong>Key Achievement:</strong> Achieved 85.83% accuracy with 181.35Hz bandwidth in measuring hand displacement (10-40mm range). System successfully classifies movement for stroke rehabilitation monitoring.
                     </div>
                     
                     <h4>Performance Metrics</h4>
                     <ul>
-                        <li> Achieved a 3 second braking time for a car at 100.91 km/hr </li>
-                        <li> Achieved a 41.69 m braking distance</li>
-                        <li> Achieved a 0.20 slip ratio coefficient</li>
+                        <li>Accuracy: 85.83%</li>
+                        <li>Bandwidth: 181.35Hz</li>
+                        <li>System error: 14.17%</li>
+                        <li>Total cost: R388.40</li>
+                        <li>Movement classification threshold: 20mm</li>
                     </ul>
+                </div>
+                
+                <div class="content-section">
+                    <div class="links">
+                        <a href="projects.html#project5" class="link-btn">View Full Project Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project 6 Modal (Audio Controlled Toy Car) -->
+    <div id="project6-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Audio Controlled Remote Toy Car</h2>
+                <button class="close-modal" onclick="closeModal('project6-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="content-section">
+                    <h3>Project Overview</h3>
+                    <p>This project designed and implemented a microcontroller-free remote-controlled toy car operated through audio signals using DTMF tone detection. The system uses pure analog circuitry with LM567 tone detectors to decode specific audio frequencies for directional control.</p>
+                    
+                    <div class="tech-tags">
+                        <span class="tech-tag">Analog Circuits</span>
+                        <span class="tech-tag">DTMF Signal Processing</span>
+                        <span class="tech-tag">LM567 Tone Detectors</span>
+                        <span class="tech-tag">Control Systems</span>
+                        <span class="tech-tag">Embedded Design</span>
+                    </div>
+                    
+                    <div class="project-details">
+                        <ul>
+                            <li><strong>Duration:</strong> 8-10 weeks</li>
+                            <li><strong>Role:</strong> Team Lead & Circuit Designer</li>
+                            <li><strong>Category:</strong> Control Systems & Embedded Design</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Problem Statement</h3>
+                    <p>Design a remote-controlled toy car using audio signals as control input, with immunity against interference from other teams' signals, without using any microcontrollers, and with strict power constraints (max 5V across DC motors).</p>
+                    
+                    <h4>Key Constraints</h4>
+                    <ul>
+                        <li>No microcontrollers allowed in design</li>
+                        <li>Control signal limited to 20Hz-20kHz audio range</li>
+                        <li>Maximum 5V across DC motors</li>
+                        <li>No modifications to issued chassis</li>
+                        <li>Immunity against other teams' control signals</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <h3>Results & Analysis</h3>
+                    
+                    <div class="result-highlight">
+                        <strong>Key Achievement:</strong> Successfully completed track course in 7.38 minutes with full immunity against other teams' signals. Implemented dual-tone frequency detection system without any microcontrollers, meeting all design constraints.
+                    </div>
+                    
+                    <h4>Performance Metrics</h4>
+                    <ul>
+                        <li>Track completion time: 7.38 minutes</li>
+                        <li>Control distance: ~1 meter</li>
+                        <li>Full immunity against interference</li>
+                        <li>Dual-tone frequency detection for reliability</li>
+                        <li>Total cost: R930.00</li>
+                    </ul>
+                </div>
+                
+                <div class="content-section">
+                    <div class="links">
+                        <a href="projects.html#project6" class="link-btn">View Full Project Details</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1138,43 +1142,53 @@
         const skillDetails = {
             control: {
                 title: "Control Systems",
-                description: "Design and analysis of feedback control systems for various applications.",
+                description: "Design and analysis of feedback control systems for various applications including LQR controllers, state feedback, and vibration control.",
                 level: 90
             },
             power: {
                 title: "Power Electronics",
-                description: "Design and implementation of power conversion circuits and systems.",
+                description: "Design and implementation of power conversion circuits, motor drivers, and power management systems.",
                 level: 85
             },
             comm: {
                 title: "Communication Systems",
-                description: "Analysis and design of communication systems and networks.",
+                description: "Analysis and design of communication systems including 5G networks, edge computing optimization, and network protocols.",
                 level: 80
             },
             matlab: {
                 title: "MATLAB & Simulink",
-                description: "Simulation, modeling, and analysis of engineering systems.",
+                description: "Simulation, modeling, and analysis of engineering systems including control systems, signal processing, and network simulations.",
                 level: 95
             },
             cpp: {
                 title: "C/C++",
-                description: "Embedded systems programming and algorithm implementation.",
+                description: "Embedded systems programming, algorithm implementation, and microcontroller programming for various applications.",
                 level: 85
             },
             python: {
                 title: "Python",
-                description: "Data analysis, automation, and scientific computing.",
+                description: "Data analysis, automation, scientific computing, and algorithm development for engineering applications.",
                 level: 80
             },
             ltspice: {
                 title: "LTspice",
-                description: "Circuit simulation and analysis for electronic designs.",
+                description: "Circuit simulation and analysis for electronic designs including analog circuits, filters, and signal conditioning.",
                 level: 75
             },
             arduino: {
                 title: "Arduino",
-                description: "Prototyping and implementation of embedded systems.",
+                description: "Prototyping and implementation of embedded systems for biomedical devices, measurement systems, and control applications.",
                 level: 90
+            },
+            plc: {
+                title: "PLC Programming",
+                description: "Industrial automation using Siemens PLCs with ladder logic programming for deterministic control systems.",
+                level: 70
+            },
+            embedded: {
+                title: "Embedded Systems",
+                description: "Design and implementation of microcontroller-based systems for real-time control and measurement applications.",
+                level: 85
             }
         };
         
