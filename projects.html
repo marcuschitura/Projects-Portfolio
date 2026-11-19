@@ -1,1434 +1,942 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcus Chitura - Project Portfolio</title>
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --gray: #7f8c8d;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-        
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            transition: var(--transition);
-        }
-        
-        .back-btn:hover {
-            transform: translateX(-5px);
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .project-nav {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        
-        .project-filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .filter-btn {
-            padding: 0.5rem 1.5rem;
-            background: white;
-            border: 2px solid var(--secondary);
-            border-radius: 25px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-        
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        #projects {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        
-        .project-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .project-header {
-            padding: 1.5rem;
-            background: var(--primary);
-            color: white;
-        }
-        
-        .project-card h2 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .project-category {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .project-card p {
-            margin-bottom: 1rem;
-            color: var(--gray);
-        }
-        
-        .project-details {
-            margin: 1rem 0;
-        }
-        
-        .project-details li {
-            margin-bottom: 0.5rem;
-            list-style-type: none;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        
-        .project-details li:before {
-            content: "•";
-            color: var(--secondary);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-        
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-        
-        .tech-tag {
-            background: var(--light);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--dark);
-        }
-        
-        .result-highlight {
-            background: #e8f4fc;
-            padding: 1rem;
-            border-radius: 5px;
-            border-left: 4px solid var(--secondary);
-            margin: 1rem 0;
-        }
-        
-        .project-link {
-            display: inline-block;
-            margin-top: auto;
-            padding: 0.8rem 1.5rem;
-            background: var(--secondary);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        
-        .project-link:hover {
-            background: var(--primary);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: var(--dark);
-            color: white;
-            margin-top: 3rem;
-        }
-        
-        @media (max-width: 768px) {
-            #projects {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-        }
-        
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        
-        .modal-content {
-            background: white;
-            margin: 2rem auto;
-            width: 90%;
-            max-width: 1000px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            animation: modalFade 0.3s;
-        }
-        
-        @keyframes modalFade {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .modal-header {
-            padding: 1.5rem;
-            background: var(--primary);
-            color: white;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .close-modal {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .modal-body {
-            padding: 2rem;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .content-section {
-            margin-bottom: 2rem;
-        }
-        
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .gallery-item {
-            background: var(--light);
-            height: 180px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcus Chitura — Project Portfolio</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Space+Mono:wght@400;700&display=swap');
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        
-        .download-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            background: var(--secondary);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        
-        .download-btn:hover {
-            background: var(--primary);
-        }
-        
-        .coming-soon {
-            background: var(--light);
-            color: var(--gray);
-            cursor: not-allowed;
-        }
-        
-        .coming-soon:hover {
-            background: var(--light);
-            transform: none;
-        }
+    :root {
+        --bg: #000000;
+        --text: #ffffff;
+        --text-dim: #a0a0a0;
+        --accent: #00e0c6;
+        --border: #222222;
+        --font-main: 'Inter', sans-serif;
+        --font-mono: 'Space Mono', monospace;
+    }
 
-        .disclaimer {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-            color: #856404;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        .video-container {
-            margin: 1rem 0;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
+    html { scroll-behavior: smooth; }
 
-        .video-container video {
-            width: 100%;
-            display: block;
-        }
-    </style>
+    body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: var(--font-main);
+        overflow-x: hidden;
+        line-height: 1.6;
+    }
+
+    /* ===== Static PCB Grid Background ===== */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: -1;
+        background-color: #000;
+        background-image: 
+            linear-gradient(rgba(0, 224, 198, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 224, 198, 0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    /* ===== Navbar ===== */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 4rem;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    .nav-logo {
+        font-weight: 900;
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        color: var(--text);
+        text-transform: uppercase;
+        font-family: var(--font-mono);
+        text-decoration: none;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); }
+
+    /* ===== Page Header ===== */
+    .page-header {
+        padding: 10rem 4rem 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        transition: color 0.3s, transform 0.3s;
+    }
+
+    .back-btn:hover {
+        color: var(--accent);
+        transform: translateX(-5px);
+    }
+
+    h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -1px;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+
+    .subtitle {
+        color: var(--text-dim);
+        font-size: 1rem;
+        max-width: 600px;
+        margin-bottom: 3rem;
+    }
+
+    /* ===== Filter Bar ===== */
+    .filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 4rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1rem;
+    }
+
+    .filter-btn {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-dim);
+        padding: 0.5rem 1rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .filter-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .filter-btn.active {
+        background: var(--accent);
+        color: #000;
+        border-color: var(--accent);
+        font-weight: 700;
+    }
+
+    /* ===== Project Grid ===== */
+    .project-grid {
+        max-width: 1200px;
+        margin: 0 auto 6rem;
+        padding: 0 4rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .project-card {
+        border: 1px solid var(--border);
+        background: rgba(10, 10, 10, 0.8);
+        backdrop-filter: blur(4px);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        text-decoration: none;
+        color: var(--text);
+        scroll-margin-top: 100px;
+    }
+
+    .project-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 40px rgba(0, 224, 198, 0.1);
+    }
+
+    /* NEW: Persistent highlight class */
+    .project-card.highlighted {
+        border-color: var(--accent);
+        box-shadow: 0 0 25px rgba(0, 224, 198, 0.3);
+        transform: translateY(-5px);
+    }
+    
+    .card-header {
+        padding: 2rem;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+    }
+
+    .card-category {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-header h2 {
+        font-size: 1.3rem;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+
+    .card-body {
+        padding: 2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-body p {
+        color: var(--text-dim);
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+
+    .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .tech-tag {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        padding: 0.2rem 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: var(--text-dim);
+    }
+
+    .key-result {
+        background: rgba(0, 224, 198, 0.05);
+        border-left: 2px solid var(--accent);
+        padding: 1rem;
+        font-size: 0.85rem;
+        color: #ddd;
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+    }
+
+    .view-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-top: auto;
+        transition: gap 0.3s;
+    }
+
+    .project-card:hover .view-btn {
+        gap: 15px;
+    }
+
+    /* ===== Empty State / No Results ===== */
+    .no-results {
+        grid-column: 1 / -1;
+        text-align: center;
+        color: var(--text-dim);
+        font-family: var(--font-mono);
+        padding: 4rem 0;
+    }
+
+    /* ===== Modal (Project Details) ===== */
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(8px);
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 4rem 1rem;
+    }
+
+    .modal.open { display: block; }
+
+    .modal-content {
+        background: #0a0a0a;
+        border: 1px solid var(--border);
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+        animation: fadeUp 0.4s ease;
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-header {
+        padding: 3rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .modal-header h2 {
+        font-size: 2rem;
+        line-height: 1.1;
+        max-width: 80%;
+    }
+
+    .close-modal {
+        background: none;
+        border: none;
+        color: var(--text-dim);
+        font-size: 2rem;
+        cursor: pointer;
+        line-height: 1;
+        transition: color 0.3s;
+    }
+
+    .close-modal:hover { color: var(--accent); }
+
+    .modal-body {
+        padding: 3rem;
+    }
+
+    .modal-body h3 {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 2rem 0 1rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.5rem;
+    }
+
+    .modal-body h3:first-child { margin-top: 0; }
+
+    .modal-body p,
+    .modal-body li {
+        color: var(--text-dim);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    .modal-body ul {
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-body li { margin-bottom: 0.5rem; }
+
+    .modal-body strong { color: var(--text); }
+
+    .download-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.8rem 1.5rem;
+        background: var(--border);
+        color: var(--text);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: all 0.3s;
+    }
+
+    .download-btn:hover {
+        background: var(--accent);
+        color: #000;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+        padding: 4rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        background: #000;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+        .project-grid { grid-template-columns: 1fr; }
+        nav { padding: 1.5rem 2rem; }
+        .nav-links { display: none; }
+        .page-header { padding: 8rem 2rem 2rem; }
+        .project-grid { padding: 0 2rem; }
+        .modal-header { padding: 2rem; }
+        .modal-body { padding: 2rem; }
+        .modal-header h2 { font-size: 1.5rem; }
+    }
+</style>
 </head>
 <body>
-    <header>
-        <a href="index.html" class="back-btn">← Back to Home</a>
-        <h1>Project Portfolio</h1>
-        <p class="subtitle">A showcase of my technical projects and research initiatives</p>
-    </header>
 
-    <div class="project-nav">
-        <div class="project-filters">
-            <button class="filter-btn active" data-filter="all">All Projects</button>
-            <button class="filter-btn" data-filter="networking">Networking</button>
-            <button class="filter-btn" data-filter="control-systems">Control Systems</button>
-            <button class="filter-btn" data-filter="power-electronics">Power Electronics</button>
-            <button class="filter-btn" data-filter="biomedical">Biomedical</button>
+<!-- Navbar -->
+<nav>
+    <a href="index.html" class="nav-logo">MARCUS.CHITURA</a>
+    <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#hardware">Hardware</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+    </ul>
+</nav>
+
+<!-- Header -->
+<header class="page-header">
+    <a href="index.html" class="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Home
+    </a>
+    <h1>Project Archive</h1>
+    <p class="subtitle">
+        A comprehensive log of my engineering work. Filter by discipline to find specific technical breakdowns, methodologies, and performance results.
+    </p>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="networking">Networking</button>
+        <button class="filter-btn" data-filter="control-systems">Control Systems</button>
+        <button class="filter-btn" data-filter="biomedical">Biomedical</button>
+        <button class="filter-btn" data-filter="power-electronics">Power Electronics</button>
+    </div>
+</header>
+
+<!-- Main Project Grid -->
+<main class="project-grid" id="projectGrid">
+
+    <!-- PROJECT 1 -->
+    <div class="project-card" id="project1" data-category="networking" onclick="openModal('modal1')">
+        <div class="card-header">
+            <div class="card-category">Networking & Edge Computing</div>
+            <h2>Edge Computation in 5G IAB Networks</h2>
+        </div>
+        <div class="card-body">
+            <p>Produced an edge computation algorithm focused on optimising task offloading at the network edge to minimize latency and energy consumption.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">NS-3</span>
+                <span class="tech-tag">C++</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Optimization</span>
+            </div>
+            <div class="key-result">
+                <strong>Key Result:</strong> 89.3% energy efficiency, 43.9% offloading rate, 4.4ms minimum latency, and 100% reliability across network slices.
+            </div>
+            <span class="view-btn">View Full Details →</span>
         </div>
     </div>
 
-    <section id="projects">
-        <!-- PROJECT 1 - Existing -->
-        <div class="project-card" data-category="networking">
-            <div class="project-header">
-                <h2>Edge Computation in 5G IAB Networks</h2>
-                <div class="project-category">Networking & Edge Computing</div>
-            </div>
-            <div class="project-content">
-                <p><em>This project focused on producing a edge computation algorithm focused on optimising task offloading at the network edge to minimize latency and energy consumption.</em></p>
-                
-                <div class="tech-tags">
-                    <span class="tech-tag">NS-3</span>
-                    <span class="tech-tag">C++</span>
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Network Simulation</span>
-                </div>
-                
-                <div class="project-details">
-                    <ul>
-                        <li><strong>Focus:</strong> Network optimisation and Edge computing</li>
-                        <li><strong>Duration:</strong>  8 weeks</li>
-                        <li><strong>Role:</strong> Researcher & Developer</li>
-                    </ul>
-                </div>
-                
-                <div class="result-highlight">
-                    <strong>Key Result:</strong> Collected results indicate that the proposed multi-objective
-algorithm maintains a balanced trade-off between energy efficiency (89.3 %) and offloading rate (43.9 %) while achieving minimal
-latency, full deadline adherence, and 100 % reliability across multiple network slices.
-                </div>
-                
-                <a href="#" class="project-link" data-project="project1">View Project Details</a>
-            </div>
+    <!-- PROJECT 2 -->
+    <div class="project-card" id="project2" data-category="control-systems" onclick="openModal('modal2')">
+        <div class="card-header">
+            <div class="card-category">Control Systems & Structural</div>
+            <h2>Footbridge Active Vibration Control</h2>
         </div>
-
-        <!-- PROJECT 2 - Existing -->
-        <div class="project-card" data-category="control-systems">
-            <div class="project-header">
-                <h2>Footbridge Active Vibration Control</h2>
-                <div class="project-category">Control Systems & Structural Engineering</div>
+        <div class="card-body">
+            <p>Designed an active control system to negate structural vibrations caused by lateral synchronous excitation using a multi-actuator LQR-based control law.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">MATLAB</span>
+                <span class="tech-tag">Simulink</span>
+                <span class="tech-tag">LQR Control</span>
             </div>
-            <div class="project-content">
-                <p><em>Designing an active control system to negate structural vibrations caused by lateral synchronous excitation. This was achieved by the proposal of a total sum multi-actuator LQR based control law.</em></p>
-                
-                <div class="tech-tags">
-                    <span class="tech-tag">MATLAB</span>
-                    <span class="tech-tag">Simulink</span>
-                    <span class="tech-tag">Control Systems</span>
-                </div>
-                
-                <div class="project-details">
-                    <ul>
-                        <li><strong>Focus:</strong> Structural engineering and control systems</li>
-                        <li><strong>Duration:</strong> 8 weeks </li>
-                        <li><strong>Role:</strong> Control System Designer</li>
-                    </ul>
-                </div>
-                
-                <div class="result-highlight">
-                    <strong>Key Result:</strong> The proposed control law was tested on a 13 DOF footbridge model linearised for lateral vibrations. The results show that the controller was able to reduce structural vibrations from the second to the sixth modes of vibration, showcasing improvements in lateral excitation mitigation maximum of 72.6 % with a minimum of 35.7 % meeting servicebility criteria and practical implementation limits. 
-                </div>
-                
-                <a href="#" class="project-link" data-project="project2">View Project Details</a>
+            <div class="key-result">
+                <strong>Key Result:</strong> Reduced structural vibrations across modes 2-6, achieving up to 72.6% improvement in lateral excitation mitigation within serviceability limits.
             </div>
-        </div>
-
-        <!-- PROJECT 3 - Existing -->
-        <div class="project-card" data-category="control-systems">
-            <div class="project-header">
-                <h2>Application of Full State Feedback Controller on a Non-Linear Braking System for EV</h2>
-                <div class="project-category">Control Systems & Systems Design</div>
-            </div>
-            <div class="project-content">
-                <p><em>Comprehensive design and simulation of a non-linear feedback controller for optimised slip control.</em></p>
-                
-                <div class="tech-tags">
-                    <span class="tech-tag">Simulink</span>
-                    <span class="tech-tag">Control Systems</span>
-                    <span class="tech-tag">Power Electronics</span>
-                </div>
-                
-                <div class="project-details">
-                    <ul>
-                        <li><strong>Focus:</strong> Control systems and power engineering </li>
-                        <li><strong>Duration:</strong> 10 weeks</li>
-                        <li><strong>Role:</strong> Control Systems Engineer</li>
-                    </ul>
-                </div>
-                
-                <div class="result-highlight">
-                    <strong>Key Result:</strong> The simulated model showed that the full state feedback controller was able to maintain the slip coefficient within optimal braking limits across varying road conditions, enhancing braking performance and safety. A 3 second breaking time was achieved for a vehicle at 100 km/h on a high friction road surface meeting performance criteria based on the Tesla Model S regenerative braking system which received a 5 star NCAP safety rating. A optimal 0.20 friction coefficient was maintained across varying road conditions.
-                </div>
-                
-                <a href="#" class="project-link" data-project="project3">View Project Details</a>
-            </div>
-        </div>
-
-        <!-- PROJECT 4 - Existing Wearable EMG Device -->
-        <div class="project-card" data-category="biomedical">
-            <div class="project-header">
-                <h2>Wearable EMG Device for Prosthetic Control</h2>
-                <div class="project-category">Biomedical Engineering & Signal Processing</div>
-            </div>
-            <div class="project-content">
-                <p><em>Design and implementation of a wearable electromyography (EMG) device for capturing muscle activity data to support gesture identification for a bionic hand used by amputees.</em></p>
-                
-                <div class="tech-tags">
-                    <span class="tech-tag">LTspice</span>
-                    <span class="tech-tag">Arduino</span>
-                    <span class="tech-tag">Signal Processing</span>
-                    <span class="tech-tag">Biomedical</span>
-                </div>
-                
-                <div class="project-details">
-                    <ul>
-                        <li><strong>Focus:</strong> Biomedical signal acquisition and processing</li>
-                        <li><strong>Duration:</strong> 6 weeks</li>
-                        <li><strong>Role:</strong> Lead Designer & Engineer</li>
-                    </ul>
-                </div>
-                
-                <div class="result-highlight">
-                    <strong>Key Result:</strong> The system successfully captured EMG signals within the target bandwidth of 2.99Hz to 468.89 Hz, with a fast response time of 0.8 seconds to reach steady state. The design proved cost-effective at R1665.80 while meeting key performance criteria for wearable prosthetic applications.
-                </div>
-                
-                <a href="#" class="project-link" data-project="project4">View Project Details</a>
-            </div>
-        </div>
-
-        <!-- PROJECT 5 - NEW: Hand Motion Measurement System -->
-        <div class="project-card" data-category="biomedical">
-            <div class="project-header">
-                <h2>Hand Motion Measurement System for Stroke Rehabilitation</h2>
-                <div class="project-category">Biomedical Engineering & Measurement Systems</div>
-            </div>
-            <div class="project-content">
-                <p><em>Designed and built a displacement measurement system using Hall effect sensor to monitor hand motion capability for stroke patients in clinical rehabilitation.</em></p>
-                
-                <div class="tech-tags">
-                    <span class="tech-tag">Arduino</span>
-                    <span class="tech-tag">SS495A Hall Sensor</span>
-                    <span class="tech-tag">Signal Processing</span>
-                    <span class="tech-tag">LCD Display</span>
-                    <span class="tech-tag">Biomedical</span>
-                </div>
-                
-                <div class="project-details">
-                    <ul>
-                        <li><strong>Focus:</strong> Biomedical measurement & rehabilitation technology</li>
-                        <li><strong>Duration:</strong> 8-10 weeks</li>
-                        <li><strong>Role:</strong> Lead Designer & System Integrator</li>
-                    </ul>
-                </div>
-                
-                <div class="result-highlight">
-                    <strong>Key Result:</strong> Achieved 85.83% accuracy with 181.35Hz bandwidth in measuring hand displacement (10-40mm range). System classifies movement as "adequate" or "insufficient" based on 20mm threshold for stroke rehabilitation monitoring.
-                </div>
-                
-                <a href="#" class="project-link" data-project="project5">View Project Details</a>
-            </div>
-        </div>
-
-        <!-- PROJECT 6 - NEW: Audio Controlled Toy Car -->
-        <div class="project-card" data-category="control-systems">
-            <div class="project-header">
-                <h2>Audio Controlled Remote Toy Car</h2>
-                <div class="project-category">Control Systems & Embedded Design</div>
-            </div>
-            <div class="project-content">
-                <p><em>Designed and implemented a microcontroller-free remote-controlled toy car operated through audio signals using DTMF tone detection and pure analog circuitry.</em></p>
-                
-                <div class="tech-tags">
-                    <span class="tech-tag">LM567 Tone Detectors</span>
-                    <span class="tech-tag">L298N Motor Driver</span>
-                    <span class="tech-tag">Analog Circuits</span>
-                    <span class="tech-tag">DTMF Signal Processing</span>
-                    <span class="tech-tag">MAX9814 Mic</span>
-                </div>
-                
-                <div class="project-details">
-                    <ul>
-                        <li><strong>Focus:</strong> Analog control systems & signal processing</li>
-                        <li><strong>Duration:</strong> 8-10 weeks</li>
-                        <li><strong>Role:</strong> Team Lead & Circuit Designer</li>
-                    </ul>
-                </div>
-                
-                <div class="result-highlight">
-                    <strong>Key Result:</strong> Successfully completed track course in 7.38 minutes with immunity against other teams' signals. Implemented dual-tone frequency detection system without any microcontrollers, meeting all design constraints.
-                </div>
-                
-                <a href="#" class="project-link" data-project="project6">View Project Details</a>
-            </div>
-        </div>
-
-        <!-- PROJECT 7 - NEW: Automated Sorting System -->
-        <div class="project-card" data-category="control-systems">
-            <div class="project-header">
-                <h2>Automated Pallet Sorting System</h2>
-                <div class="project-category">Control Systems & Industrial Automation</div>
-            </div>
-            <div class="project-content">
-                <p><em>Implemented an automated pallet sorting system using Siemens S7-1200 PLC with ladder logic programming for deterministic, fault-tolerant control in Factory I/O simulation environment.</em></p>
-                
-                <div class="tech-tags">
-                    <span class="tech-tag">Siemens TIA Portal</span>
-                    <span class="tech-tag">Ladder Logic</span>
-                    <span class="tech-tag">Factory I/O</span>
-                    <span class="tech-tag">PLC Programming</span>
-                    <span class="tech-tag">Industrial Automation</span>
-                </div>
-                
-                <div class="project-details">
-                    <ul>
-                        <li><strong>Focus:</strong> Industrial automation & PLC systems</li>
-                        <li><strong>Duration:</strong> 1 week</li>
-                        <li><strong>Role:</strong> PLC Programmer & Systems Engineer</li>
-                    </ul>
-                </div>
-                
-                <div class="result-highlight">
-                    <strong>Key Result:</strong> Successfully implemented memory-based decision storage, shift-bit tracking for pallet position, and production counting in a deterministic control system with proper emergency stop and fault tolerance.
-                </div>
-                
-                <a href="#" class="project-link" data-project="project7">View Project Details</a>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <p>© 2023 Marcus Chitura | Project Portfolio</p>
-    </footer>
-
-    <!-- Project 1 Modal (Existing) -->
-    <div id="project1-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Edge Computation in 5G IAB Networks</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This research project focused on optimising task offloading strategies in 5G Integrated Access and Backhaul (IAB) networks to minimize latency and energy consumption for edge computing applications.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">NS-3</span>
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">MATLAB</span>
-                        <span class="tech-tag">Network Simulation</span>
-                        <span class="tech-tag">5G Networks</span>
-                        <span class="tech-tag">Multi-Objective Optimisation Algorithm</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 8 weeks</li>
-                            <li><strong>Role:</strong> Researcher & Developer</li>
-                            <li><strong>Category:</strong> Networking & Edge Computing</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p> Existing computation offloading methods are ineffective for 5G mmWave IAB networks because they assume stable links and simple topologies. They fail to dynamically adapt to the real-world challenges of volatile mmWave signals, the energy cost of multi-hop routing, and congestion in a shared wireless backhaul. This project designed a new offloading algorithm to solve this gap, enabling efficient, low-latency, and energy-conscious task execution in next-generation networks.</p>
-                    
-                    <h4>Key Challenges</h4>
-                    <ul>
-                        <li>Energy efficiency in multi-hop network topologies</li>
-                        <li>Conflicting quality of service requirements across the different 5G network slices</li>
-                        <li>Computational complexity for real time decision making</li>
-                        <li>Designing an algorithm complex enough to be effective yet simple enough for polynomial-time execution in a dynamic network</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>Developed a hierarchical edge computing framework integrated with 5G IAB network topology, implementing dynamic task allocation algorithms based on real-time network conditions.</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li>Designed a directed acyclic graph network topology with 8 IAB nodes collocated with a MEC server at the gNB base station, with a a dynamic propagation model using 3GPP UMi Canyon Modelling.</li>
-                        <li>Implemented a Breadth First Search routing selection policy to ensure efficiency load balancing across the network.</li>
-                        <li>Developed a slice specific multi-objective optimisation algorithm.</li>
-                        <li>Benchmarked the performance of the proposed algorithm against other optimisation algorithms such as convex game theory optimisation,single objective optimisation and joint objective optimisation. </li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> Collected results indicate that the proposed multi-objective algorithm maintains a balanced trade-off between energy efficiency (89.3 %) and offloading rate (43.9 %) while achieving minimal latency, full deadline adherence, and 100 % reliability across multiple network slices.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li> Achieved a minimum latency of 4.4 ms with a average of 11.5 ms across 1531 URLLC tasks. </li>
-                        <li> Achieved a network throughput of 3.25 Gbps peaking at 5.42 Gbps for the URLLC network slice indicating latency improvements are met without compromising data rate performance.</li>
-                        <li> Achieved a minimum latency of 4.1 ms and a average of 153.4 ms across 2813 eMMB tasks.</li>
-                        <li> The eMMB network slice attained a data rate of 3.2 Gbps peaking at 5.54 Gbps, showing sustainability of eMMB services.</li>
-                        <li> Energy efficiency improvements of up to 89.3% were observed while maintaining an offloading rate of 43.9% across the 5044 tasks produced in the simulation environment.</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Project Materials</h3>
-                    
-                    <div class="download-links">
-                        <a href="assets/pdfs/edge-computation-5g-report.pdf" class="download-btn" target="_blank">
-                            Project Report PDF
-                        </a>
-                        <a href="assets/code/edge-computation-code.zip" class="download-btn">
-                            Optimisation Code
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <span class="view-btn">View Full Details →</span>
         </div>
     </div>
 
-    <!-- Project 2 Modal (Existing) -->
-    <div id="project2-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Footbridge Active Vibration Control</h2>
-                <button class="close-modal">&times;</button>
+    <!-- PROJECT 3 -->
+    <div class="project-card" id="project3" data-category="control-systems" onclick="openModal('modal3')">
+        <div class="card-header">
+            <div class="card-category">Control Systems & EV</div>
+            <h2>EV Braking System Controller</h2>
+        </div>
+        <div class="card-body">
+            <p>Comprehensive design and simulation of a non-linear feedback controller for optimised slip control in electric vehicles.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">Simulink</span>
+                <span class="tech-tag">Non-Linear Control</span>
+                <span class="tech-tag">Systems Design</span>
             </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This project involved designing and simulating an active vibration control system for pedestrian footbridges using Linear Quadratic Regulator (LQR) control theory to suppress structural vibrations induced by human movement and environmental factors.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">MATLAB</span>
-                        <span class="tech-tag">Simulink</span>
-                        <span class="tech-tag">Control Systems</span>
-                        <span class="tech-tag">LQR Control</span>
-                        <span class="tech-tag">Structural Dynamics</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 8 weeks</li>
-                            <li><strong>Role:</strong> Control System Designer</li>
-                            <li><strong>Category:</strong> Control Systems & Structural Engineering</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Pedestrian footbridges often experience excessive vibrations due to human-induced loads and environmental factors, leading to discomfort for users and potential structural integrity issues over time.</p>
-                    
-                    <h4>Key Challenges</h4>
-                    <ul>
-                        <li>Modelling a MDOF footbridge that is susceptible lateral excitations</li>
-                        <li>Designing a controller robust to varying excitation frequencies</li>
-                        <li>Minimizing control effort while maximizing vibration suppression within servicebility limits</li>
-                        <li>Accounting for real-world implementation constraints</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p> The solution was approached iteratively, with the initial implementation of a single degree of freedom PID controller for proof of concept. This was developed into a single degree of freedom LQR controller in state space to compare the performance of the two proposed control paths. A multi-degree of freedom model of the footbridge susceptible to lateral excitations was proposed, this was paired with a proposed total sum penalty multi-actuator LQR control law aimed at providing vibration supression at multiple frequencies.</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li>Created detailed mathematical model of bridge dynamics</li>
-                        <li>Implemented LQR controller with optimised weighting matrices</li>
-                        <li>Simulated system response to various excitation patterns</li>
-                        <li>Analyzed controller performance under different scenarios</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> The controller reduced structural vibrations from the second to the sixth modes of vibration, with improvements in lateral excitation mitigation ranging from 35.7% to 72.6%, meeting serviceability criteria and practical implementation limits.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li>Vibration amplitude reduction: 35.7% - 72.6% across modes</li>
-                        <li>Settling time improvement: 75% faster</li>
-                        <li>Control effort: Within practical implementation limits</li>
-                        <li>Robustness: Maintained performance across frequency range</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Project Materials</h3>
-                    
-                    <div class="download-links">
-                        <a href="assets/pdfs/footbridge-vibration-report.pdf" class="download-btn" target="_blank">
-                            Project Report PDF
-                        </a>
-                        <a href="assets/code/footbridge-matlab-code.zip" class="download-btn">
-                            MATLAB Code & Simulink Models
-                        </a>
-                    </div>
-                </div>
+            <div class="key-result">
+                <strong>Key Result:</strong> Maintained optimal 0.20 slip coefficient, achieving a 3-second braking time and 41.69m distance from 100 km/h.
             </div>
+            <span class="view-btn">View Full Details →</span>
         </div>
     </div>
 
-    <!-- Project 3 Modal (Existing) -->
-    <div id="project3-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Application of Full State Feedback Controller on a Non-Linear Braking System for EV</h2>
-                <button class="close-modal">&times;</button>
+    <!-- PROJECT 4 -->
+    <div class="project-card" id="project4" data-category="biomedical" onclick="openModal('modal4')">
+        <div class="card-header">
+            <div class="card-category">Biomedical Engineering</div>
+            <h2>Wearable EMG Device</h2>
+        </div>
+        <div class="card-body">
+            <p>Design and implementation of a wearable electromyography (EMG) device for capturing muscle activity to support gesture identification for a bionic hand.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">LTspice</span>
+                <span class="tech-tag">Arduino</span>
+                <span class="tech-tag">Signal Processing</span>
             </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p> This project involved the implementation of a full state linearisation control law, aimed at controlling the slip coefficient ensuring optimal braking in different road conditions.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">Simulink</span>
-                        <span class="tech-tag">Non-Linear Control</span>
-                        <span class="tech-tag">Control Systems</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 10 weeks </li>
-                            <li><strong>Role:</strong> Control System Designer</li>
-                            <li><strong>Category:</strong> Power Electronics & Systems Design</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Traditional braking systems struggle to maintain optimal slip ratios across varying road conditions, leading to reduced braking efficiency and safety concerns.</p>
-                    
-                    <h4>Key Challenges</h4>
-                    <ul>
-                        <li>Simulation of system dynamics for non-linear system.</li>
-                        <li>Mathematical formulation of non-linear feedback linearisation law.</li>
-                        <li>Achieving optimal braking and meeting performance criteria for optimal braking coefficient.</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>Designed a line-interactive UPS topology with automatic voltage regulation, battery backup, and fast switching between mains and battery power.</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li>Simulated system dynamics in Simulink.</li>
-                        <li> Develop system dynamics and apply Lie derivatives to find the linearised feedback control law.</li>
-                        <li> Use pole placement to control the performance of the car model to ensure performance criteria is met.</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> The simulated model showed that the full state feedback controller was able to maintain the slip coefficient within optimal braking limits across varying road conditions, enhancing braking performance and safety. A 3 second breaking time with a braking distance of 41.69 m was achieved for a vehicle at 100 km/hr on a high friction road surface meeting performance criteria based on the Tesla Model S regenerative braking system which received a 5 star NCAP safety rating. A optimal 0.20 friction coefficient was maintained across varying road conditions.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li> Achieved a 3 second braking time for a car at 100.91 km/hr </li>
-                        <li> Achieved a 41.69 m braking distance</li>
-                        <li> Achieved a 0.20 slip ratio coefficient</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Project Materials</h3>
-                    
-                    <div class="download-links">
-                        <a href="assets/pdfs/nonlinear-control-report.pdf" class="download-btn" target="_blank">
-                           Project Report PDF
-                        </a>
-                        <a href="assets/code/feedback-linearisation.zip" class="download-btn">
-                            Simulink Model File
-                        </a>
-                    </div>
-                </div>
+            <div class="key-result">
+                <strong>Key Result:</strong> Captured signals from 2.99Hz to 468.89Hz with a 0.8s response time, meeting key criteria for a cost-effective prosthetic solution (R1665.80).
             </div>
+            <span class="view-btn">View Full Details →</span>
         </div>
     </div>
 
-    <!-- Project 4 Modal - Existing Wearable EMG Device -->
-    <div id="project4-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Wearable EMG Device for Prosthetic Control</h2>
-                <button class="close-modal">&times;</button>
+    <!-- PROJECT 5 -->
+    <div class="project-card" id="project5" data-category="biomedical" onclick="openModal('modal5')">
+        <div class="card-header">
+            <div class="card-category">Biomedical Measurement</div>
+            <h2>Stroke Rehabilitation Measurement System</h2>
+        </div>
+        <div class="card-body">
+            <p>Designed a displacement measurement system using Hall effect sensors to monitor hand motion capability for stroke patients in clinical rehabilitation.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">Arduino</span>
+                <span class="tech-tag">SS495A Hall Sensor</span>
+                <span class="tech-tag">LCD Display</span>
             </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This project involved the design and implementation of a wearable electromyography (EMG) device for capturing muscle activity data to support gesture identification for a bionic hand used by amputees. The design follows guidelines from the Surface Electromyography for the Non-Invasive Assessment of Muscles (SENIAM) project and established biomedical standards.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">LTspice</span>
-                        <span class="tech-tag">Arduino</span>
-                        <span class="tech-tag">Signal Processing</span>
-                        <span class="tech-tag">Biomedical Engineering</span>
-                        <span class="tech-tag">Control Systems</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 6 weeks</li>
-                            <li><strong>Role:</strong> Lead Designer & Engineer</li>
-                            <li><strong>Category:</strong> Biomedical Electronics & Signal Processing</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Traditional EMG systems for prosthetic control are often limited by their complexity, lack of portability, and susceptibility to motion artifacts. This project aimed to develop a wearable solution that addresses these limitations while maintaining accurate signal acquisition.</p>
-                    
-                    <h4>Key Challenges</h4>
-                    <ul>
-                        <li>Designing a system with high input impedance to interface with dry electrodes</li>
-                        <li>Implementing effective noise rejection for motion artifacts and electrical interference</li>
-                        <li>Creating a compact, wearable form factor suitable for daily use</li>
-                        <li>Ensuring compatibility with prosthetic control systems</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>The design employed a single-channel EMG configuration with differential signal acquisition for improved noise immunity. The system architecture included:</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li>Ag-AgCl dry electrodes following SENIAM placement standards</li>
-                        <li>3 op-amp instrumentation amplifier with gain of 11 and CMRR of 100.827 dB</li>
-                        <li>Fourth-order Butterworth bandpass filter (20-500 Hz)</li>
-                        <li>Precision rectifier and envelope detector for signal conditioning</li>
-                        <li>Arduino Nano for signal processing with 1200 Hz sampling rate</li>
-                        <li>Bluetooth module for wireless data transmission</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> The system successfully captured EMG signals within the target bandwidth of 2.99Hz to 468.89 Hz, with a fast response time of 0.8 seconds to reach steady state. The design proved cost-effective at R1665.80 while meeting key performance criteria for wearable prosthetic applications.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li>Input impedance: 10^12 Ω (OPA2604 op-amps)</li>
-                        <li>Common Mode Rejection Ratio: 100.827 dB</li>
-                        <li>Bandwidth: 2.99Hz - 468.89 Hz</li>
-                        <li>Sampling rate: 1200 Hz (meeting Nyquist criteria)</li>
-                        <li>Response time: 0.8 seconds to steady state</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Project Materials</h3>
-                    
-                    <div class="download-links">
-                        <a href="assets/pdfs/emg-device-report.pdf" class="download-btn" target="_blank">
-                            Project Report PDF
-                        </a>
-                        <a href="assets/code/emg-circuit-design.zip" class="download-btn">
-                            Circuit Design Files
-                        </a>
-                    </div>
-                </div>
+            <div class="key-result">
+                <strong>Key Result:</strong> Achieved 85.83% accuracy with 181.35Hz bandwidth in measuring hand displacement (10-40mm range) for real-time clinical feedback.
             </div>
+            <span class="view-btn">View Full Details →</span>
         </div>
     </div>
 
-    <!-- PROJECT 5 MODAL - NEW: Hand Motion Measurement System -->
-    <div id="project5-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Hand Motion Measurement System for Stroke Rehabilitation</h2>
-                <button class="close-modal">&times;</button>
+    <!-- PROJECT 6 -->
+    <div class="project-card" id="project6" data-category="control-systems" onclick="openModal('modal6')">
+        <div class="card-header">
+            <div class="card-category">Embedded & Analog Design</div>
+            <h2>Audio Controlled Remote Toy Car</h2>
+        </div>
+        <div class="card-body">
+            <p>Designed a microcontroller-free remote-controlled toy car operated through audio signals using DTMF tone detection and pure analog circuitry.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">LM567</span>
+                <span class="tech-tag">L298N</span>
+                <span class="tech-tag">Analog Circuits</span>
+                <span class="tech-tag">DTMF</span>
             </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This project involved the design, construction, and testing of a displacement measurement system to monitor hand motion capability for stroke rehabilitation. The system uses a Hall effect sensor to detect hand displacement and classifies movement as "adequate" or "insufficient" based on clinical thresholds.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">Arduino Uno</span>
-                        <span class="tech-tag">SS495A Hall Sensor</span>
-                        <span class="tech-tag">Signal Processing</span>
-                        <span class="tech-tag">I2C LCD Display</span>
-                        <span class="tech-tag">Biomedical Measurement</span>
-                        <span class="tech-tag">Embedded Systems</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 8-10 weeks</li>
-                            <li><strong>Role:</strong> Lead Designer & System Integrator</li>
-                            <li><strong>Category:</strong> Biomedical Engineering & Measurement Systems</li>
-                            <li><strong>Team Size:</strong> 2 members</li>
-                        </ul>
-                    </div>
-
-                
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Stroke rehabilitation requires accurate monitoring of motor recovery progress, particularly in hand function. Existing solutions are often complex and expensive. This project aimed to create a cost-effective displacement measurement system that clinicians could use to characterize rehabilitation progress for stroke patients.</p>
-                    
-                    <h4>Key Challenges</h4>
-                    <ul>
-                        <li>Designing within sensor limitations (SS495A Hall effect sensor)</li>
-                        <li>Achieving accurate displacement measurement within 10-40mm range</li>
-                        <li>Implementing non-linearity correction for sensor output</li>
-                        <li>Creating a clinically relevant classification system (adequate vs insufficient movement)</li>
-                        <li>Meeting target error of 5% with limited components</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>The system was designed using Bentley's measurement system model, with SS495A Hall effect sensor as the sensing element, Arduino Uno for signal processing, and I2C LCD display for data presentation.</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li><strong>Sensing Element:</strong> SS495A Hall effect sensor detecting magnetic field changes from hand-mounted magnet</li>
-                        <li><strong>Signal Processing:</strong> Arduino Uno performing ADC conversion and non-linearity correction using equation: y = 0.075x + 1.77</li>
-                        <li><strong>Movement Classification:</strong> Threshold-based system: ≥20mm = "ADQ" (Adequate), <20mm = "INS" (Insufficient)</li>
-                        <li><strong>Display:</strong> I2C LCD module showing real-time displacement and classification</li>
-                        <li><strong>Power Supply:</strong> 5V power bank using Duracell Plus Alkaline Battery</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> The system successfully measured hand displacement within 10-40mm range with 85.83% accuracy and 181.35Hz bandwidth, providing real-time feedback for stroke rehabilitation monitoring.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li><strong>Accuracy:</strong> 85.83% (target: 95%)</li>
-                        <li><strong>System Error:</strong> 14.17% (target: 5%)</li>
-                        <li><strong>Bandwidth:</strong> 181.35Hz</li>
-                        <li><strong>Sensitivity:</strong> 0.075V/mm</li>
-                        <li><strong>Input Range:</strong> 10-40mm displacement</li>
-                        <li><strong>Output Range:</strong> 2.5V - 4.84V</li>
-                        <li><strong>Cost:</strong> R388.40 total system cost</li>
-                    </ul>
-                    
-                    <h4>Error Analysis</h4>
-                    <ul>
-                        <li>Sensor error: 9%</li>
-                        <li>Signal processing error: 3%</li>
-                        <li>Display error: 2.17%</li>
-                        <li>Total system error: 14.17%</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Critical Analysis & Future Recommendations</h3>
-                    <p>The system offers low-cost, non-invasive operation with real-time feedback but is limited to one axis of motion and requires individual patient calibration.</p>
-                    
-                    <h4>Improvement Opportunities</h4>
-                    <ul>
-                        <li>Use more robust sensors for better accuracy</li>
-                        <li>Implement multi-axis motion detection</li>
-                        <li>Add wireless data transmission for remote monitoring</li>
-                        <li>Develop more sophisticated classification algorithms</li>
-                        <li>Reduce system error to meet 5% target</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Project Materials</h3>
-                    
-                    <div class="download-links">
-                        <a href="assets/pdfs/stroke-rehabilitation-measurement-system.pdf" class="download-btn" target="_blank">
-                            Project Report PDF
-                        </a>
-                    </div>
-                </div>
+            <div class="key-result">
+                <strong>Key Result:</strong> Completed the track in 7.38 minutes with full immunity against other teams' signals, using zero microcontrollers.
             </div>
+            <span class="view-btn">View Full Details →</span>
         </div>
     </div>
 
-    <!-- PROJECT 6 MODAL - NEW: Audio Controlled Toy Car -->
-<div id="project6-modal" class="modal">
+    <!-- PROJECT 7 -->
+    <div class="project-card" id="project7" data-category="control-systems" onclick="openModal('modal7')">
+        <div class="card-header">
+            <div class="card-category">Industrial Automation</div>
+            <h2>Automated Pallet Sorting System</h2>
+        </div>
+        <div class="card-body">
+            <p>Implemented an automated pallet sorting system using Siemens S7-1200 PLC with ladder logic programming for deterministic, fault-tolerant control in Factory I/O.</p>
+            <div class="tech-tags">
+                <span class="tech-tag">Siemens TIA Portal</span>
+                <span class="tech-tag">Ladder Logic</span>
+                <span class="tech-tag">Factory I/O</span>
+            </div>
+            <div class="key-result">
+                <strong>Key Result:</strong> Successfully implemented memory-based decision storage, shift-bit tracking, and production counting with full fault tolerance.
+            </div>
+            <span class="view-btn">View Full Details →</span>
+        </div>
+    </div>
+
+    <div class="no-results" id="noResults" style="display: none;">
+        No projects found in this category.
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+    <p>© 2024 Marcus Chitura · Electrical Engineer</p>
+    <p style="margin-top: 0.5rem;">
+        <a href="index.html">HOME</a> · 
+        <a href="https://www.linkedin.com/in/marcus-chitura-429491245/" target="_blank">LINKEDIN</a>
+    </p>
+</footer>
+
+<!-- ================= MODALS ================= -->
+
+<!-- Modal 1 -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Edge Computation in 5G IAB Networks</h2>
+            <button class="close-modal" onclick="closeModal('modal1')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <h3>Project Overview</h3>
+            <p>This research project focused on optimising task offloading strategies in 5G Integrated Access and Backhaul (IAB) networks to minimize latency and energy consumption for edge computing applications.</p>
+            
+            <h3>Problem Statement</h3>
+            <p>Existing computation offloading methods are ineffective for 5G mmWave IAB networks because they assume stable links and simple topologies. This project designed a new offloading algorithm to solve this gap, enabling efficient, low-latency task execution in next-generation networks.</p>
+            
+            <h3>Methodology</h3>
+            <ul>
+                <li>Designed a directed acyclic graph network topology with 8 IAB nodes collocated with a MEC server.</li>
+                <li>Implemented a Breadth First Search routing selection policy for load balancing.</li>
+                <li>Developed a slice-specific multi-objective optimisation algorithm.</li>
+                <li>Benchmarked against convex game theory and single/joint objective optimisation algorithms.</li>
+            </ul>
+
+            <h3>Results</h3>
+            <ul>
+                <li><strong>Energy Efficiency:</strong> 89.3%</li>
+                <li><strong>Offloading Rate:</strong> 43.9%</li>
+                <li><strong>Latency:</strong> Minimum of 4.4 ms, average of 11.5 ms across 1531 URLLC tasks.</li>
+                <li><strong>Throughput:</strong> Network throughput of 3.25 Gbps, peaking at 5.42 Gbps.</li>
+            </ul>
+
+            <div class="download-links">
+                <a href="assets/pdfs/edge-computation-5g-report.pdf" target="_blank" class="download-btn">📄 Project Report PDF</a>
+                <a href="assets/code/edge-computation-code.zip" class="download-btn">📦 Optimisation Code</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 2 -->
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Footbridge Active Vibration Control</h2>
+            <button class="close-modal" onclick="closeModal('modal2')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <h3>Project Overview</h3>
+            <p>This project involved designing and simulating an active vibration control system for pedestrian footbridges using Linear Quadratic Regulator (LQR) control theory.</p>
+            
+            <h3>Methodology</h3>
+            <p>The solution was approached iteratively: single degree of freedom PID, then LQR in state space, and finally a multi-degree of freedom model paired with a total sum penalty multi-actuator LQR control law.</p>
+            
+            <h3>Results</h3>
+            <ul>
+                <li><strong>Vibration Reduction:</strong> 35.7% to 72.6% across modes 2 through 6.</li>
+                <li><strong>Settling Time:</strong> 75% faster.</li>
+                <li><strong>Control Effort:</strong> Maintained within practical implementation limits.</li>
+            </ul>
+
+            <div class="download-links">
+                <a href="assets/pdfs/footbridge-vibration-report.pdf" target="_blank" class="download-btn">📄 Project Report PDF</a>
+                <a href="assets/code/footbridge-matlab-code.zip" class="download-btn">📦 MATLAB Code</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 3 -->
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>EV Braking System Controller</h2>
+            <button class="close-modal" onclick="closeModal('modal3')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <h3>Project Overview</h3>
+            <p>Implementation of a full state linearisation control law aimed at controlling the slip coefficient, ensuring optimal braking in different road conditions.</p>
+            
+            <h3>Methodology</h3>
+            <ul>
+                <li>Simulated system dynamics in Simulink.</li>
+                <li>Applied Lie derivatives to find the linearised feedback control law.</li>
+                <li>Used pole placement to control the performance of the car model.</li>
+            </ul>
+            
+            <h3>Results</h3>
+            <ul>
+                <li><strong>Braking Time:</strong> 3 seconds for a car at 100.91 km/hr.</li>
+                <li><strong>Braking Distance:</strong> 41.69 m.</li>
+                <li><strong>Slip Ratio Coefficient:</strong> 0.20 (optimal).</li>
+            </ul>
+
+            <div class="download-links">
+                <a href="assets/pdfs/nonlinear-control-report.pdf" target="_blank" class="download-btn">📄 Project Report PDF</a>
+                <a href="assets/code/feedback-linearisation.zip" class="download-btn">📦 Simulink Model</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 4 -->
+<div id="modal4" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Wearable EMG Device</h2>
+            <button class="close-modal" onclick="closeModal('modal4')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <h3>Project Overview</h3>
+            <p>Design and implementation of a wearable electromyography (EMG) device for capturing muscle activity data to support gesture identification for a bionic hand used by amputees.</p>
+            
+            <h3>Methodology</h3>
+            <ul>
+                <li>Ag-AgCl dry electrodes following SENIAM placement standards.</li>
+                <li>3 op-amp instrumentation amplifier with gain of 11 and CMRR of 100.827 dB.</li>
+                <li>Fourth-order Butterworth bandpass filter (20-500 Hz).</li>
+                <li>Arduino Nano with 1200 Hz sampling rate.</li>
+            </ul>
+            
+            <h3>Results</h3>
+            <ul>
+                <li><strong>Bandwidth:</strong> 2.99Hz - 468.89 Hz.</li>
+                <li><strong>Response Time:</strong> 0.8 seconds to steady state.</li>
+                <li><strong>Cost:</strong> R1665.80.</li>
+            </ul>
+
+            <div class="download-links">
+                <a href="assets/pdfs/emg-device-report.pdf" target="_blank" class="download-btn">📄 Project Report PDF</a>
+                <a href="assets/code/emg-circuit-design.zip" class="download-btn">📦 Circuit Design Files</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 5 -->
+<div id="modal5" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Stroke Rehabilitation Measurement System</h2>
+            <button class="close-modal" onclick="closeModal('modal5')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <h3>Project Overview</h3>
+            <p>Designed and built a displacement measurement system using Hall effect sensors to monitor hand motion capability for stroke patients in clinical rehabilitation.</p>
+            
+            <h3>Methodology</h3>
+            <ul>
+                <li>SS495A Hall effect sensor detecting magnetic field changes.</li>
+                <li>Arduino Uno performing ADC conversion and non-linearity correction.</li>
+                <li>Threshold-based movement classification (≥20mm = ADQ).</li>
+            </ul>
+            
+            <h3>Results</h3>
+            <ul>
+                <li><strong>Accuracy:</strong> 85.83%.</li>
+                <li><strong>Bandwidth:</strong> 181.35Hz.</li>
+                <li><strong>Cost:</strong> R388.40.</li>
+            </ul>
+
+            <div class="download-links">
+                <a href="assets/pdfs/stroke-rehabilitation-measurement-system.pdf" target="_blank" class="download-btn">📄 Project Report PDF</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 6 -->
+<div id="modal6" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h2>Audio Controlled Remote Toy Car</h2>
-            <button class="close-modal">&times;</button>
+            <button class="close-modal" onclick="closeModal('modal6')">&times;</button>
         </div>
         <div class="modal-body">
-            <div class="content-section">
-                <h3>Project Overview</h3>
-                <p>This project designed and implemented a microcontroller-free remote-controlled toy car operated through audio signals using DTMF tone detection. The system uses pure analog circuitry with LM567 tone detectors to decode specific audio frequencies for directional control.</p>
-                
-                <div class="tech-tags">
-                    <span class="tech-tag">LM567 Tone Detectors</span>
-                    <span class="tech-tag">L298N Motor Driver</span>
-                    <span class="tech-tag">MAX9814 Microphone</span>
-                    <span class="tech-tag">Analog Circuit Design</span>
-                    <span class="tech-tag">DTMF Signal Processing</span>
-                    <span class="tech-tag">Custom NOR Gates</span>
-                </div>
-                
-                <div class="project-details">
-                    <ul>
-                        <li><strong>Duration:</strong> 8-10 weeks</li>
-                        <li><strong>Role:</strong> Team Lead & Circuit Designer</li>
-                        <li><strong>Category:</strong> Control Systems & Embedded Design</li>
-                        <li><strong>Team Size:</strong> 3 members</li>
-                    </ul>
-                </div>
-            </div> <!-- Close content-section -->
+            <h3>Project Overview</h3>
+            <p>Designed and implemented a microcontroller-free remote-controlled toy car operated through audio signals using DTMF tone detection and pure analog circuitry.</p>
             
-            <div class="content-section">
-                <h3>Problem Statement</h3>
-                <p>Design a remote-controlled toy car using audio signals as control input, with immunity against interference from other teams' signals, without using any microcontrollers, and with strict power constraints (max 5V across DC motors).</p>
-                
-                <h4>Key Constraints</h4>
-                <ul>
-                    <li>No microcontrollers allowed in design</li>
-                    <li>Control signal limited to 20Hz-20kHz audio range</li>
-                    <li>Maximum 10V supply for circuit, 5V across DC motors</li>
-                    <li>No modifications to issued chassis</li>
-                    <li>Immunity against other teams' control signals</li>
-                </ul>
-            </div> <!-- Close content-section -->
+            <h3>Methodology</h3>
+            <ul>
+                <li>Four LM567 tone detectors set to 1937Hz, 3635Hz, 4564Hz, and 7133Hz.</li>
+                <li>Dual-tone system requiring pairs of tones for each command.</li>
+                <li>Custom-built NOR gates convert tone detector outputs to motor control signals.</li>
+            </ul>
             
-            <div class="content-section">
-                <h3>Methodology & Approach</h3>
-                <p>The solution uses LM567 tone detectors configured to detect specific audio frequencies, with dual-tone activation for interference immunity. Custom NOR gates were built to process the logic signals.</p>
-                
-                <h4>Technical Implementation</h4>
-                <ul>
-                    <li><strong>Tone Detection:</strong> Four LM567 tone detectors set to frequencies: 1937Hz, 3635Hz, 4564Hz, and 7133Hz</li>
-                    <li><strong>Dual-Tone System:</strong> Pairs of tones required for each command (e.g., 1937Hz + 3635Hz = Forward)</li>
-                    <li><strong>Signal Processing:</strong> Custom-built NOR gates convert tone detector outputs to motor control signals</li>
-                    <li><strong>Motor Control:</strong> L298N motor driver with direct interface from NOR gate outputs</li>
-                    <li><strong>Audio Input:</strong> MAX9814 microphone module with 2Vpp amplitude and adjustable gain</li>
-                    <li><strong>Control Interface:</strong> Custom mobile app for generating control tones</li>
-                </ul>
-            </div> <!-- Close content-section -->
-            
-            <div class="content-section">
-                <h3>Results & Analysis</h3>
-                
-                <div class="result-highlight">
-                    <strong>Key Achievement:</strong> Successfully completed the track course in 7.38 minutes with full immunity against other teams' signals, meeting all design constraints without using any microcontrollers.
-                </div>
-                
-                <h4>Performance Metrics</h4>
-                <ul>
-                    <li><strong>Track Completion Time:</strong> 7.38 minutes</li>
-                    <li><strong>Control Distance:</strong> ~1 meter with loud speaker</li>
-                    <li><strong>Optimal Tone Range:</strong> 3kHz - 6kHz</li>
-                    <li><strong>Immunity:</strong> Full immunity achieved through dual-tone system</li>
-                    <li><strong>Power Supply:</strong> 5V power bank (attempted 10V but caused jittery motion)</li>
-                </ul>
-                
-                <h4>Control Scheme</h4>
-                <ul>
-                    <li><strong>Forward:</strong> Tone A (1937Hz) + Tone B (3635Hz)</li>
-                    <li><strong>Right Turn:</strong> Tone A (1937Hz) + Tone C (4564Hz)</li>
-                    <li><strong>Left Turn:</strong> Tone B (3635Hz) + Tone C (4564Hz)</li>
-                    <li><strong>Reverse:</strong> Used instead of forward turning due to implementation constraints</li>
-                </ul>
-            </div> <!-- Close content-section -->
-            
-            <div class="content-section">
-                <h3>Design Evolution & Challenges</h3>
-                <p>The project evolved through several design iterations:</p>
-                
-                <h4>Initial Approaches (Abandoned)</h4>
-                <ul>
-                    <li>Analog filter bank with frequency-to-voltage converters</li>
-                    <li>FSK (Frequency Shift Keying) modulation</li>
-                    <li>ASK (Amplitude Shift Keying) modulation</li>
-                </ul>
-                
-                <h4>Technical Challenges Overcome</h4>
-                <ul>
-                    <li>Microphone sensitivity: Electret mic (20mV) → KY-038 module → MAX9814 (2Vpp)</li>
-                    <li>NOR gate inconsistency: 74LS02 IC → custom-built NOR gates</li>
-                    <li>Speed control: XL600L DC-DC boost converter attempted but abandoned</li>
-                    <li>High frequency harmonics: Discarded 7133Hz tone due to harmonic interference</li>
-                </ul>
-            </div> <!-- Close content-section -->
-            
-            <div class="content-section">
-                <h3>Cost Analysis & Future Improvements</h3>
-                
-                <h4>Total Cost: R930.00</h4>
-                <ul>
-                    <li>LM567 Tone Detectors (4×): R120</li>
-                    <li>MAX9814 Microphone (2×): R208</li>
-                    <li>XL600L Boost Converter: R140</li>
-                    <li>Power Banks: R470</li>
-                </ul>
-                
-                <h4>Recommended Improvements</h4>
-                <ul>
-                    <li>Use XE2211 IC (two logic outputs per IC) to reduce cost</li>
-                    <li>Build custom MOSFET H-bridge instead of L298N for better efficiency</li>
-                    <li>Implement forward turning capability</li>
-                    <li>Increase control range with better audio amplification</li>
-                </ul>
-            </div> <!-- Close content-section -->
-            
-            <div class="content-section">
-                <h3>Project Materials</h3>
-                
-                <div class="download-links">
-                    <a href="assets/pdfs/audio-controlled-remote-toy-car.pdf" class="download-btn" target="_blank">
-                        Project Report PDF
-                    </a>          
-                </div>
-            </div> <!-- Close content-section -->
-        </div> <!-- Close modal-body -->
-    </div> <!-- Close modal-content -->
-</div> <!-- Close project6-modal -->
+            <h3>Results</h3>
+            <ul>
+                <li><strong>Track Time:</strong> 7.38 minutes.</li>
+                <li><strong>Control Distance:</strong> ~1 meter.</li>
+                <li><strong>Immunity:</strong> Full immunity via dual-tone system.</li>
+            </ul>
 
-<!-- PROJECT 7 MODAL - NEW: Automated Sorting System -->
-<div id="project7-modal" class="modal">
+            <div class="download-links">
+                <a href="assets/pdfs/audio-controlled-remote-toy-car.pdf" target="_blank" class="download-btn">📄 Project Report PDF</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 7 -->
+<div id="modal7" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h2>Automated Pallet Sorting System</h2>
-            <button class="close-modal">&times;</button>
+            <button class="close-modal" onclick="closeModal('modal7')">&times;</button>
         </div>
         <div class="modal-body">
-            <div class="content-section">
-                <h3>Project Overview</h3>
-                <p>This project implemented an automated pallet sorting system using Siemens S7-1200 PLC programmed with ladder logic (IEC 61131-3). The system detects, classifies by height, tracks, and routes pallets using deterministic control logic with fault tolerance in the Factory I/O simulation environment.</p>
-                
-                <div class="tech-tags">
-                    <span class="tech-tag">Siemens TIA Portal</span>
-                    <span class="tech-tag">Ladder Logic</span>
-                    <span class="tech-tag">Factory I/O</span>
-                    <span class="tech-tag">PLC Programming</span>
-                    <span class="tech-tag">Industrial Automation</span>
-                    <span class="tech-tag">IEC 61131-3</span>
-                </div>
-                
-                <div class="project-details">
-                    <ul>
-                        <li><strong>Duration:</strong> 1 week</li>
-                        <li><strong>Role:</strong> PLC Programmer & Systems Engineer</li>
-                        <li><strong>Category:</strong> Control Systems & Industrial Automation</li>
-                        <li><strong>Platform:</strong> Siemens S7-1200 PLC</li>
-                    </ul>
-                </div>
-            </div> <!-- Close content-section -->
+            <h3>Project Overview</h3>
+            <p>Implemented an automated pallet sorting system using Siemens S7-1200 PLC with ladder logic programming for deterministic, fault-tolerant control.</p>
             
-            <div class="content-section">
-                <h3>Problem Statement</h3>
-                <p>Design and implement a deterministic, fault-tolerant control system for automated pallet sorting that operates reliably in industrial environments, with proper tracking, classification, and routing logic.</p>
-                
-                <h4>Key Requirements</h4>
-                <ul>
-                    <li>Pallet detection and entry handling</li>
-                    <li>Height classification (low/high)</li>
-                    <li>Position tracking through the system</li>
-                    <li>Deterministic routing to left/right conveyors</li>
-                    <li>Fault-tolerant emergency stop system</li>
-                    <li>Production counting and validation</li>
-                </ul>
-            </div> <!-- Close content-section -->
+            <h3>Methodology</h3>
+            <ul>
+                <li>Memory bits store decisions instead of relying on real-time sensor states.</li>
+                <li>Shift-left instructions for logical pallet tracking.</li>
+                <li>Interlocks centralize logic operation safety.</li>
+            </ul>
             
-            <div class="content-section">
-                <h3>Methodology & Approach</h3>
-                <p>The system was designed using memory-based decision storage rather than real-time sensor dependency, with shift-bit tracking for pallet position and deterministic control logic.</p>
-                
-                <h4>System Architecture</h4>
-                <ul>
-                    <li><strong>Control Logic:</strong> Ladder logic (IEC 61131-3) programmed in Siemens TIA Portal</li>
-                    <li><strong>Simulation Environment:</strong> Factory I/O for realistic industrial simulation</li>
-                    <li><strong>Memory Structure:</strong> Decision storage in memory bits for independence from sensor states</li>
-                    <li><strong>Tracking Method:</strong> Shift-left instructions for logical pallet tracking</li>
-                    <li><strong>Safety System:</strong> Emergency stop overrides all motion commands</li>
-                </ul>
-                
-                <h4>Key Engineering Decisions</h4>
-                <ul>
-                    <li>Memory bits store decisions instead of relying on real-time sensor states</li>
-                    <li>Edge detection prevents repeated actions within single pallet cycles</li>
-                    <li>Logical tracking (bit shifting) improves robustness and scalability</li>
-                    <li>Interlocks centralize logic operation safety</li>
-                    <li>Timer-controlled turntable rotation for consistent mechanical motion</li>
-                </ul>
-            </div> <!-- Close content-section -->
-            
-            <div class="content-section">
-                <h3>System Logic Breakdown</h3>
-                
-                <div class="result-highlight">
-                    <strong>Core Control Principle:</strong> The system uses stored decisions rather than real-time sensor dependency, making it deterministic and fault-tolerant.
-                </div>
-                
-                <h4>Functional Modules</h4>
-                <ul>
-                    <li><strong>Start/Stop Control:</strong> Latched memory bit controls all downstream logic with emergency stop override</li>
-                    <li><strong>Pallet Detection:</strong> Optical and proximity sensors with debouncing logic</li>
-                    <li><strong>Height Classification:</strong> Low and high optical sensors with Set/Reset logic for decision storage</li>
-                    <li><strong>Pallet Tracking:</strong> Shift-left instruction moves bit through storage byte as pallet advances</li>
-                    <li><strong>Turntable Control:</strong> Timer-controlled rotation with TOTALLY ROTATED memory bit</li>
-                    <li><strong>Conveyor Routing:</strong> Exclusive actuation based on stored height decision and pallet position</li>
-                    <li><strong>Production Counting:</strong> Counters with edge case prevention for accurate tracking</li>
-                </ul>
-            </div> <!-- Close content-section -->
-            
-            <div class="content-section">
-                <h3>Technical Implementation Details</h3>
-                
-                <h4>1. Pallet Detection & Entry Handling</h4>
-                <ul>
-                    <li>Optical sensors detect pallet presence</li>
-                    <li>Debouncing logic prevents multiple triggers</li>
-                    <li>Feeder and entry conveyors coordinate for smooth entry</li>
-                </ul>
-                
-                <h4>2. Height Classification System</h4>
-                <ul>
-                    <li>Low and high optical sensors classify each pallet</li>
-                    <li>Classification result stored in decision memory using Set/Reset logic</li>
-                    <li>Preserves decision even after pallet leaves sensing zone</li>
-                    <li>Avoids scan cycle dependency</li>
-                </ul>
-                
-                <h4>3. Pallet Tracking Implementation</h4>
-                <ul>
-                    <li>Shift-left instruction moves bit through 8-bit storage byte</li>
-                    <li>Each pallet advancement triggers bit shift</li>
-                    <li>Logical tracking independent of physical sensor reliability</li>
-                    <li>Improves system robustness</li>
-                </ul>
-                
-                <h4>4. Turntable Control Logic</h4>
-                <ul>
-                    <li>Timer controls turn motor for fixed duration</li>
-                    <li>TOTALLY ROTATED memory bit set upon completion</li>
-                    <li>Guarantees consistent mechanical motion</li>
-                    <li>Independent of sensor noise or delays</li>
-                </ul>
-                
-                <h4>5. Conveyor Routing System</h4>
-                <ul>
-                    <li>Activation based on stored height decision and pallet position</li>
-                    <li>Interlocks prevent simultaneous left/right conveyor actuation</li>
-                    <li>Exclusive and deterministic routing</li>
-                    <li>Memory-based rather than sensor-based decisions</li>
-                </ul>
-                
-                <h4>6. Production Counting & Validation</h4>
-                <ul>
-                    <li>Counters track processed pallets</li>
-                    <li>Additional logic prevents double counting</li>
-                    <li>Provides production feedback</li>
-                    <li>Validates correct system behavior</li>
-                </ul>
-            </div> <!-- Close content-section -->    
-            <div class="content-section">
-                <h3>Project Materials</h3>
-                
-                <div class="download-links">
-                    <a href="assets/pdfs/sorting-system.pdf" class="download-btn" target="_blank">
-                        Project Report PDF
-                    </a>
-                    <a href="assets/pdfs/sorting-ladder-logic.pdf" class="download-btn" target="_blank">
-                        Ladder Logic Diagram
-                    </a>
-                    <a href="assets/videos/Factory-IO-demo.mp4" class="download-btn" target="_blank">
-                        Factory I/O Demonstration
-                    </a>
-                </div>
-            </div> <!-- Close content-section -->
-        </div> <!-- Close modal-body -->
-    </div> <!-- Close modal-content -->
-</div> <!-- Close project7-modal -->
+            <h3>Results</h3>
+            <ul>
+                <li>Successfully implemented memory-based decision storage and shift-bit tracking.</li>
+                <li>Production counting in a deterministic control system with emergency stop.</li>
+            </ul>
 
+            <div class="download-links">
+                <a href="assets/pdfs/sorting-system.pdf" target="_blank" class="download-btn">📄 Project Report PDF</a>
+                <a href="assets/pdfs/sorting-ladder-logic.pdf" target="_blank" class="download-btn">📄 Ladder Logic Diagram</a>
+                <a href="assets/videos/Factory-IO-demo.mp4" target="_blank" class="download-btn">🎥 Factory I/O Demo</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // Filter functionality
-        document.querySelectorAll('.filter-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                // Update active button
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                button.classList.add('active');
-                
-                // Filter projects
-                const filter = button.getAttribute('data-filter');
-                document.querySelectorAll('.project-card').forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-        });
-        
-        // Modal functionality
-        document.querySelectorAll('.project-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const projectId = link.getAttribute('data-project');
-                const modal = document.getElementById(`${projectId}-modal`);
-                if (modal) {
-                    modal.style.display = 'block';
+<script>
+    /* =========================================
+       FILTERING LOGIC
+       ========================================= */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    const noResults = document.getElementById('noResults');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+            let visibleCount = 0;
+
+            projectCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    card.style.display = 'flex';
+                    card.style.opacity = '0';
+                    setTimeout(() => { card.style.opacity = '1'; }, 50);
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
                 }
             });
-        });
-        
-        // Close modal functionality
-        function closeAllModals() {
-            document.querySelectorAll('.modal').forEach(modal => {
-                modal.style.display = 'none';
-            });
-        }
-        
-        // Close modal when clicking close button
-        document.querySelectorAll('.close-modal').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.stopPropagation();
-                button.closest('.modal').style.display = 'none';
-            });
-        });
 
-        // Close modal when pressing Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeAllModals();
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
             }
         });
+    });
+
+    /* =========================================
+       MODAL LOGIC
+       ========================================= */
+    function openModal(id) {
+        document.getElementById(id).classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+            e.target.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal.open').forEach(m => m.classList.remove('open'));
+            document.body.style.overflow = '';
+        }
+    });
+
+    /* =========================================
+       URL HASH HIGHLIGHT LOGIC
+       ========================================= */
+    // Check if a hash exists on load (e.g., projects.html#project2)
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1);
+        const targetCard = document.getElementById(targetId);
         
-        // Close modal when clicking outside modal content
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
-                e.target.style.display = 'none';
-            }
-        });
-    </script>
+        if (targetCard) {
+            // Add the persistent highlight class
+            targetCard.classList.add('highlighted');
+            
+            // Remove highlight when the user clicks the card
+            targetCard.addEventListener('click', () => {
+                targetCard.classList.remove('highlighted');
+            }, { once: true }); // The { once: true } ensures the listener is removed after firing once
+        }
+    }
+</script>
 </body>
 </html>

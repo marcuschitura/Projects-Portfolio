@@ -1,1271 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcus Chitura - Graduate Electrical Engineer</title>
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --gray: #7f8c8d;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-            scroll-behavior: smooth;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 3rem 1rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeInUp 1s ease-out;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-        
-        .title {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            opacity: 0.8;
-        }
-        
-        .scroll-indicator {
-            margin-top: 2rem;
-            animation: bounce 2s infinite;
-            cursor: pointer;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-        
-        section {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-        
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-        }
-        
-        h2::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--secondary);
-        }
-        
-        #about {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-        }
-        
-        #about:hover {
-            transform: translateY(-5px);
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .about-text p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-        
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .skill-tag {
-            background: var(--light);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--dark);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        
-        .skill-tag:hover {
-            background: var(--secondary);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .profile-image {
-            text-align: center;
-        }
-        
-        .profile-placeholder {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: var(--light);
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            border: 5px solid var(--secondary);
-        }
-        
-        .links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .link-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            background: var(--secondary);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-        }
-        
-        .link-btn:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .link-btn.secondary {
-            background: transparent;
-            color: var(--secondary);
-            border: 2px solid var(--secondary);
-        }
-        
-        .link-btn.secondary:hover {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        .featured-projects {
-            margin-top: 3rem;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcus Chitura — Electrical Engineer</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Space+Mono:wght@400;700&display=swap');
 
-        .profile-photo {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .profile-photo:hover {
-            transform: scale(1.03);
-        }
+    :root {
+        --bg: #000000;
+        --text: #ffffff;
+        --text-dim: #a0a0a0;
+        --border: #222222;
+        --font-main: 'Inter', sans-serif;
+        --font-mono: 'Space Mono', monospace;
+    }
 
-        .profile-image {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .project-preview {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .project-preview:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .project-image {
-            height: 160px;
-            background: var(--light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            overflow: hidden;
-        }
-        
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .project-preview:hover .project-image img {
-            transform: scale(1.1);
-        }
-        
-        .project-info {
-            padding: 1.5rem;
-        }
-        
-        .project-info h3 {
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-        
-        .project-info p {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        
-        .project-link {
-            display: inline-block;
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-        
-        .project-link:hover {
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-        
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: var(--dark);
-            color: white;
-            margin-top: 3rem;
-        }
-        
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        
-        .modal-content {
-            background-color: white;
-            margin: 2rem auto;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: modalFadeIn 0.3s;
-        }
-        
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .modal-header {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .modal-header h2 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--gray);
-            transition: var(--transition);
-        }
-        
-        .close-modal:hover {
-            color: var(--accent);
-        }
-        
-        .modal-body {
-            padding: 2rem;
-        }
-        
-        .content-section {
-            margin-bottom: 2rem;
-        }
-        
-        .content-section h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        
-        .content-section h4 {
-            color: var(--dark);
-            margin: 1rem 0 0.5rem;
-        }
-        
-        .content-section p {
-            margin-bottom: 1rem;
-        }
-        
-        .content-section ul {
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .content-section li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-        
-        .tech-tag {
-            background: var(--light);
-            padding: 0.4rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: var(--dark);
-        }
-        
-        .project-details {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-        }
-        
-        .project-details ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .project-details li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-highlight {
-            background: #e8f4fd;
-            border-left: 4px solid var(--secondary);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 5px 5px 0;
-        }
-        
-        /* New Interactive Elements */
-        .interactive-element {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .floating-shapes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-        
-        .shape {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-            100% {
-                transform: translateY(-1000px) rotate(720deg);
-            }
-        }
-        
-        .skill-tag.active {
-            background: var(--secondary);
-            color: white;
-        }
-        
-        .skill-details {
-            display: none;
-            margin-top: 1rem;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 5px;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            margin-top: 0.5rem;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: var(--secondary);
-            border-radius: 4px;
-            width: 0;
-            transition: width 1s ease;
-        }
-        
-        .counter {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-        
-        @media (max-width: 768px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .title {
-                font-size: 1.2rem;
-            }
-            
-            .links {
-                justify-content: center;
-            }
-            
-            .modal-content {
-                width: 95%;
-                margin: 1rem auto;
-            }
-            
-            .modal-header {
-                padding: 1rem;
-            }
-            
-            .modal-body {
-                padding: 1rem;
-            }
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--bg); color: var(--text); font-family: var(--font-main); overflow-x: hidden; line-height: 1.6; }
 
-        /* Featured Projects Styles */
-        .featured-projects {
-            padding: 80px 20px;
-            background-color: #f8f9fa;
-        }
+    #component-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; pointer-events: none; }
+    .page-content { position: relative; z-index: 1; }
 
-        .featured-projects h2 {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 50px;
-            color: #2c3e50;
-            position: relative;
-        }
+    /* Navbar */
+    nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 1.5rem 4rem;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+    }
+    .nav-logo { font-weight: 900; font-size: 1.2rem; letter-spacing: 2px; color: var(--text); text-transform: uppercase; font-family: var(--font-mono); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--text); }
 
-        .featured-projects h2::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: #4a6491;
-            margin: 15px auto;
-            border-radius: 2px;
-        }
+    /* Hero */
+    header { min-height: 100vh; display: flex; align-items: center; padding: 0 4rem; position: relative; }
+    .hero-content { max-width: 650px; pointer-events: auto; }
+    .hero-tagline { color: var(--text-dim); font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+    .hero-tagline::before { content: ""; display: block; width: 30px; height: 1px; background: var(--text-dim); }
+    h1 { font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -1px; margin-bottom: 1rem; text-transform: uppercase; }
+    .subtitle { font-size: clamp(1.2rem, 2.5vw, 2rem); font-weight: 700; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 2rem; color: #ddd; }
+    .hero-desc { color: var(--text-dim); font-size: 1rem; max-width: 500px; margin-bottom: 2.5rem; line-height: 1.8; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+    .read-more { display: inline-flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: gap 0.3s; padding: 1rem 0; }
+    .read-more:hover { gap: 20px; }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    /* Scroll Down */
+    .scroll-down { position: absolute; bottom: 2rem; left: 4rem; display: flex; align-items: center; gap: 15px; color: var(--text-dim); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; font-family: var(--font-mono); }
+    .scroll-line { width: 1px; height: 40px; background: var(--border); position: relative; overflow: hidden; }
+    .scroll-line::after { content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: var(--text); animation: scrollAnim 2s infinite; }
+    @keyframes scrollAnim { 0% { top: -100%; } 100% { top: 100%; } }
 
-        .project-preview {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    /* Sections */
+    .content-section { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; border-top: 1px solid var(--border); background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); position: relative; z-index: 10; }
+    .section-label { color: var(--text-dim); font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 1rem; }
+    .section-title { font-size: 2.5rem; font-weight: 800; text-transform: uppercase; margin-bottom: 2rem; }
 
-        .project-preview:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .about-text p { color: var(--text-dim); margin-bottom: 1.5rem; font-size: 1.05rem; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+    .skill-tag { font-family: var(--font-mono); font-size: 0.7rem; padding: 0.35rem 0.65rem; border: 1px solid var(--border); color: var(--text); letter-spacing: 1px; transition: all 0.3s; }
+    .skill-tag:hover { border-color: var(--text); background: rgba(255, 255, 255, 0.05); }
 
-        .project-image {
-            height: 220px;
-            background-color: #e9ecef;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+    /* UNIFIED TILE LAYOUT */
+    .unified-grid { display: grid; grid-template-columns: repeat(auto-fit, 350px); gap: 1.5rem; margin-top: 2rem; justify-content: flex-start; }
+    .tech-card { border: 1px solid var(--border); background: rgba(10, 10, 10, 0.98); padding: 2rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; position: relative; display: flex; flex-direction: column; cursor: pointer; min-height: 250px; z-index: 20; }
+    .tech-card:hover { border-color: var(--text); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05); }
+    .tech-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; text-transform: uppercase; margin-top: 1rem; line-height: 1.3; }
+    .tech-card p { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 0; line-height: 1.5; }
+    .tech-card .tag { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text); border: 1px solid var(--border); padding: 0.2rem 0.6rem; display: inline-block; align-self: flex-start; }
 
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
+    #project-rotation-container { transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    #project-rotation-container.fade-out { opacity: 0; }
 
-        .project-preview:hover .project-image img {
-            transform: scale(1.05);
-        }
+    /* Footer */
+    footer { padding: 4rem; text-align: center; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); background: #000; position: relative; z-index: 10; }
+    footer a { color: var(--text); text-decoration: none; }
 
-        .project-info {
-            padding: 25px;
-        }
+    /* MODAL */
+    .pcb-modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(8px); z-index: 1000; padding: 2rem; }
+    .pcb-modal.open { display: flex; flex-direction: column; }
+    
+    .pcb-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .pcb-modal-header h2 { font-size: 1.5rem; text-transform: uppercase; font-family: var(--font-mono); }
+    .close-modal { background: none; border: none; color: var(--text-dim); font-size: 2rem; cursor: pointer; transition: color 0.3s; }
+    .close-modal:hover { color: var(--text); }
 
-        .project-info h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: #2c3e50;
-        }
+    .pcb-modal-body { flex-grow: 1; display: flex; border: 1px solid var(--border); background: #0a0a0a; overflow: hidden; }
+    .pcb-sidebar { width: 250px; border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 1.5rem 0; }
+    .pcb-tab-btn { background: transparent; border: none; color: var(--text-dim); padding: 1rem 1.5rem; text-align: left; font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; border-left: 3px solid transparent; }
+    .pcb-tab-btn:hover { color: var(--text); background: rgba(255, 255, 255, 0.02); }
+    .pcb-tab-btn.active { color: var(--text); border-left-color: var(--text); background: rgba(255, 255, 255, 0.05); font-weight: 700; }
 
-        .project-info p {
-            color: #6c757d;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
+    .pcb-viewer-container { flex-grow: 1; position: relative; background: radial-gradient(circle at center, #111 0%, #000 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .pcb-pane { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+    .pcb-pane.active { display: flex; align-items: center; justify-content: center; }
+    
+    .pcb-pane iframe { width: 100%; height: 100%; border: none; background: #fff; }
+    #pcb-canvas { width: 100%; height: 100%; display: block; }
 
-        .project-link {
-            display: inline-block;
-            color: #4a6491;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+    .loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--text-dim); font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; animation: pulse 1.5s infinite; z-index: 10; }
+    @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        .project-link:hover {
-            color: #2c3e50;
+    @media (max-width: 768px) {
+        nav { padding: 1.5rem 2rem; }
+        .nav-links { display: none; }
+        header { padding: 0 2rem; }
+        .scroll-down { left: 2rem; }
+        .content-section { padding: 4rem 2rem; }
+        .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+        .unified-grid { grid-template-columns: 1fr; justify-content: stretch; }
+        .tech-card { width: 100%; min-height: auto; }
+        .pcb-modal-body { flex-direction: column; }
+        .pcb-sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding: 0; border-right: none; border-bottom: 1px solid var(--border); }
+        .pcb-tab-btn { padding: 1rem; border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+        .pcb-tab-btn.active { border-left: none; border-bottom-color: var(--text); }
+    }
+</style>
+<script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
         }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .featured-projects h2 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+    }
+</script>
 </head>
 <body>
+
+<canvas id="component-canvas"></canvas>
+
+<div class="page-content">
+    <nav>
+        <div class="nav-logo">MARCUS.CHITURA</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#hardware">Hardware</a></li>
+            <li><a href="#projects">Projects</a></li>
+        </ul>
+    </nav>
+
     <header>
-        <div class="floating-shapes" id="floatingShapes"></div>
-        <div class="header-content">
-            <h1>Marcus Chitura</h1>
-            <p class="title">Graduate Electrical Engineer</p>
-            <p class="tagline">Designing efficient solutions to complex engineering problems</p>
-            <div class="scroll-indicator" onclick="scrollToAbout()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
+        <div class="hero-content">
+            <div class="hero-tagline">Electrical Engineering Portfolio</div>
+            <h1>SYSTEMS<br>ENGINEER</h1>
+            <div class="subtitle">CONTROL &bull; EMBEDDED SYSTEMS<br>PCB DESIGN &bull; RF ENGINEERING</div>
+            <p class="hero-desc">
+                I translate complex stuff into working solutions. From stabilising control loops to routing multi-layer PCBs and building embedded systems, I turn theoretical physics into practical, working hardware.
+            </p>
+            <a href="#about" class="read-more">
+                READ MORE 
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+        </div>
+        <div class="scroll-down">
+            <div class="scroll-line"></div>
+            SCROLL TO EXPLORE
         </div>
     </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about-content">
+    <section id="about" class="content-section">
+        <div class="section-label">01 // ABOUT</div>
+        <h2 class="section-title">Engineering Profile</h2>
+        <div class="about-grid">
             <div class="about-text">
-                <p>I've always been fascinated by how small systems can create big change, how a control loop can be the basis of stabilising a speed car, or an algorithm can make a network more efficient. That curiosity led me to electrical engineering, where I focus on control, embedded systems, and communication technologies.</p> 
-                <p>This portfolio is a reflection of that journey, projects where I learned to think critically, design precisely, and build things that actually work. Each project is a chapter in my story as an engineer, showcasing not just what I've done, but how I approach problems and create solutions.</p>
-                
-                <h3>My Skills</h3>
-                <div class="skills">
-                    <span class="skill-tag" data-skill="control">Control Systems</span>
-                    <span class="skill-tag" data-skill="power">Power Electronics</span>
-                    <span class="skill-tag" data-skill="comm">Communication Systems</span>
-                    <span class="skill-tag" data-skill="matlab">MATLAB & Simulink</span>
-                    <span class="skill-tag" data-skill="cpp">C/C++</span>
-                    <span class="skill-tag" data-skill="python">Python</span>
-                    <span class="skill-tag" data-skill="ltspice">LTspice</span>
-                    <span class="skill-tag" data-skill="arduino">Arduino</span>
-                    <span class="skill-tag" data-skill="plc">PLC Programming</span>
-                    <span class="skill-tag" data-skill="embedded">Embedded Systems</span>
-                </div>
-                
-                <div id="skill-details" class="skill-details">
-                    <!-- Dynamic content will be inserted here -->
-                </div>
-                
-                <div class="links">
-                    <a href="https://www.linkedin.com/in/marcus-chitura-429491245/" class="link-btn" target="_blank">LinkedIn</a>
-                    <a href="assets/pdfs/your-resume.pdf" class="link-btn secondary">Resume</a>
-                    <a href="projects.html" class="link-btn">View All Projects</a>
-                </div>
+                <p>I've always been fascinated by how small systems create big change how a control loop can stabilise a vehicle, how a filter cleans a biological signal, or how a well routed PCB makes hardware reliable.</p>
+                <p>My focus is on control systems, embedded design, PCB layout and RF engineering. This portfolio is a reflection of that journey, showcasing projects where I learned to think critically, design precisely, and build things that actually work.</p>
             </div>
-            
-            <div class="profile-image">
-                <img src="assets/images/your-photo.jpg" alt="Marcus Chitura" class="profile-photo">
-            </div>
-        </div>
-    </section>
-    
-    <section class="featured-projects">
-        <h2>Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-preview" onclick="openModal('emg-modal')">
-                <div class="project-image">
-                    <img src="assets/images/emg-device.jpg" alt="Wearable EMG Device">
-                </div>
-                <div class="project-info">
-                    <h3>Wearable EMG Device</h3>
-                    <p>Design and implementation of a wearable electromyography device for prosthetic control applications.</p>
-                    <a href="#" class="project-link">View Project →</a>
-                </div>
-            </div>
-            
-            <div class="project-preview" onclick="openModal('project5-modal')">
-                <div class="project-image">
-                    <img src="assets/images/hand-motion-system.jpg" alt="Hand Motion Measurement System">
-                </div>
-                <div class="project-info">
-                    <h3>Hand Motion Measurement System</h3>
-                    <p>Hall effect sensor system for stroke rehabilitation monitoring with real-time feedback.</p>
-                    <a href="#" class="project-link">View Project →</a>
-                </div>
-            </div>
-            
-            <div class="project-preview" onclick="openModal('project1-modal')">
-                <div class="project-image">
-                    <img src="assets/images/5g-network.jpg" alt="Edge Computation in 5G IAB Networks">
-                </div>
-                <div class="project-info">
-                    <h3>Edge Computation in 5G IAB Networks</h3>
-                    <p>Optimizing task offloading at the network edge to minimize latency and energy consumption.</p>
-                    <a href="#" class="project-link">View Project →</a>
-                </div>
-            </div>
-            
-            <div class="project-preview" onclick="openModal('project6-modal')">
-                <div class="project-image">
-                    <img src="assets/images/audio-controlled-car.jpg" alt="Audio Controlled Remote Toy Car">
-                </div>
-                <div class="project-info">
-                    <h3>Audio Controlled Toy Car</h3>
-                    <p>Microcontroller-free remote control using DTMF tone detection and analog circuitry.</p>
-                    <a href="#" class="project-link">View Project →</a>
+            <div>
+                <h3 style="margin-bottom: 1rem; font-size: 1rem; color: var(--text);">CORE COMPETENCIES</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">MATLAB</span>
+                    <span class="skill-tag">R</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Arduino IDE</span>
+                    <span class="skill-tag">SQL (MySQL)</span>
+                    <span class="skill-tag">PLC Programming</span>
+                    <span class="skill-tag">AutoCAD</span>
+                    <span class="skill-tag">DIALux</span>
+                    <span class="skill-tag">KiCAD PCB Design</span>
+                    <span class="skill-tag">Signal Processing</span>
+                    <span class="skill-tag">Circuit Design & Analysis</span>
+                    <span class="skill-tag">Power Systems & Automation</span>
+                    <span class="skill-tag">Embedded Systems & Hardware Testing</span>
+                    <span class="skill-tag">Electronic Design Automation</span>
                 </div>
             </div>
         </div>
     </section>
-    
+
+    <section id="hardware" class="content-section">
+        <div class="section-label">02 // HARDWARE</div>
+        <h2 class="section-title">PCB Design</h2>
+        <p style="color: var(--text-dim); max-width: 600px; margin-bottom: 2rem;">
+            Click any tile to view the interactive 3D model, schematics, and technical breakdown.
+        </p>
+
+        <div class="unified-grid">
+        
+            <div class="tech-card" onclick="open3DViewer(
+                'STM32 USB Device', 
+                'assets/models/stm32_usb.glb', 
+                'assets/pdfs/stm32_schematic.pdf', 
+                'assets/pdfs/stm32_routing.pdf', 
+                'assets/pdfs/stm32_report.pdf')">
+                <div class="tag">STM32 / USB DEBUG </div>
+                <h3>STM32 USB Controller</h3>
+                <p>Custom STM32 MCU board featuring USB debugging, an external crystal for precise timing, and an onboard buck converter power supply.</p>
+            </div>
+
+            
+            <div class="tech-card" onclick="open3DViewer(
+                'Audio Controlled Car', 
+                'assets/models/audio_car.glb', 
+                'assets/pdfs/Audio_Controlled_Car.pdf', 
+                'assets/pdfs/Audio_Controlled_Car_Layout.pdf', 
+                'assets/pdfs/Audio_Controlled_Car_Report.pdf')">
+                <div class="tag">ANALOG / DIGITAL / PWM CONTROL </div>
+                <h3>Encrypted Audio Control System</h3>
+                <p>Mixed-signal system using MAX9814 and dual NE567 tone detectors for secure dual-tone control. Features NE555 PWM and a 74LS157 MUX for differential L298N motor control.</p>
+            </div>
+            
+            <div class="tech-card" onclick="open3DViewer(
+                'Dual Microphone Array Source Localization', 
+                'assets/models/mic_array.glb', 
+                'assets/pdfs/mic_array_schematic.pdf', 
+                'assets/pdfs/mic_array_layout.pdf', 
+                'assets/pdfs/mic_array_report.pdf')">
+                <div class="tag">STM32 / ANALOG DESIGN</div>
+                <h3>Microphone Array Source Localization</h3>
+                <p>Dual microphone array for parking distance estimation, allows driver to know if they are too close to an object. It features MIC E1 PCB electret microphones  with a LM318N dual preamplifier with a 1.67 V bias voltage. Fed to a DUal Regular Simultaneous Mode setup STM32G474RE microcontroller for synchronized ADC sampling. </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="content-section">
+        <div class="section-label">03 // PROJECTS</div>
+        <h2 class="section-title">Engineering Portfolio</h2>
+        <p style="color: var(--text-dim); max-width: 600px; margin-bottom: 2rem;">
+            I like problem solving. These are my solutions a rotating showcase of my technical projects. Click any card to view the full engineering breakdown.
+        </p>
+
+        <div class="unified-grid" id="project-rotation-container"></div>
+    </section>
+
     <footer>
-        <p>© 2023 Marcus Chitura | Graduate Electrical Engineer</p>
-        <p style="margin-top: 0.5rem; opacity: 0.8;">7 Technical Projects | Control Systems | Biomedical Engineering | Network Optimization</p>
+        <p>© 2024 Marcus Chitura · Electrical Engineer</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://www.linkedin.com/in/marcus-chitura-429491245/" target="_blank">LINKEDIN</a> · 
+            <a href="projects.html">FULL PROJECT ARCHIVE</a>
+        </p>
     </footer>
+</div>
 
-    <!-- EMG Device Modal -->
-    <div id="emg-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Wearable EMG Device for Prosthetic Control</h2>
-                <button class="close-modal" onclick="closeModal('emg-modal')">&times;</button>
+<div id="pcb-modal" class="pcb-modal">
+    <div class="pcb-modal-header">
+        <h2 id="pcb-modal-title">PCB Board</h2>
+        <button class="close-modal" onclick="close3DViewer()">&times;</button>
+    </div>
+    
+    <div class="pcb-modal-body">
+        <div class="pcb-sidebar">
+            <button class="pcb-tab-btn active" onclick="switchPcbTab('tab-schematic', this)">Schematic</button>
+            <button class="pcb-tab-btn" onclick="switchPcbTab('tab-layout', this)">Routed Layout</button>
+            <button class="pcb-tab-btn" onclick="switchPcbTab('tab-3d', this)">3D Model</button>
+            <button class="pcb-tab-btn" onclick="switchPcbTab('tab-report', this)">Technical Report</button>
+        </div>
+
+        <div class="pcb-viewer-container">
+            <div id="tab-schematic" class="pcb-pane active">
+                <iframe id="pcb-pdf-schematic" src=""></iframe>
             </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This project involved the design and implementation of a wearable electromyography (EMG) device for capturing muscle activity data to support gesture identification for a bionic hand used by amputees. The design follows guidelines from the Surface Electromyography for the Non-Invasive Assessment of Muscles (SENIAM) project and established biomedical standards.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">Biomedical Engineering</span>
-                        <span class="tech-tag">Signal Processing</span>
-                        <span class="tech-tag">LTspice</span>
-                        <span class="tech-tag">Arduino</span>
-                        <span class="tech-tag">Control Systems</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 6 weeks</li>
-                            <li><strong>Role:</strong> Lead Designer & Engineer</li>
-                            <li><strong>Category:</strong> Biomedical Electronics & Signal Processing</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Traditional EMG systems for prosthetic control are often limited by their complexity, lack of portability, and susceptibility to motion artifacts. This project aimed to develop a wearable solution that addresses these limitations while maintaining accurate signal acquisition.</p>
-                    
-                    <h4>Key Challenges</h4>
-                    <ul>
-                        <li>Designing a system with high input impedance to interface with dry electrodes</li>
-                        <li>Implementing effective noise rejection for motion artifacts and electrical interference</li>
-                        <li>Creating a compact, wearable form factor suitable for daily use</li>
-                        <li>Ensuring compatibility with prosthetic control systems</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Methodology & Approach</h3>
-                    <p>The design employed a single-channel EMG configuration with differential signal acquisition for improved noise immunity. The system architecture included:</p>
-                    
-                    <h4>Technical Implementation</h4>
-                    <ul>
-                        <li>Ag-AgCl dry electrodes following SENIAM placement standards</li>
-                        <li>3 op-amp instrumentation amplifier with gain of 11 and CMRR of 100.827 dB</li>
-                        <li>Fourth-order Butterworth bandpass filter (20-500 Hz)</li>
-                        <li>Precision rectifier and envelope detector for signal conditioning</li>
-                        <li>Arduino Nano for signal processing with 1200 Hz sampling rate</li>
-                        <li>Bluetooth module for wireless data transmission</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> The system successfully captured EMG signals within the target bandwidth of 2.99Hz to 468.89 Hz, with a fast response time of 0.8 seconds to reach steady state. The design proved cost-effective at R1665.80 while meeting key performance criteria for wearable prosthetic applications.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li>Input impedance: 10^12 Ω (OPA2604 op-amps)</li>
-                        <li>Common Mode Rejection Ratio: 100.827 dB</li>
-                        <li>Bandwidth: 2.99Hz - 468.89 Hz</li>
-                        <li>Sampling rate: 1200 Hz (meeting Nyquist criteria)</li>
-                        <li>Response time: 0.8 seconds to steady state</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <div class="links">
-                        <a href="projects.html#project4" class="link-btn">View Full Project Details</a>
-                    </div>
-                </div>
+            <div id="tab-layout" class="pcb-pane">
+                <iframe id="pcb-pdf-layout" src=""></iframe>
+            </div>
+            <div id="tab-3d" class="pcb-pane">
+                <div id="pcb-canvas"></div>
+                <div id="pcb-loader" class="loader">Loading 3D Model...</div>
+            </div>
+            <div id="tab-report" class="pcb-pane">
+                <iframe id="pcb-pdf-report" src=""></iframe>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Project 1 Modal (Edge Computation in 5G) -->
-    <div id="project1-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Edge Computation in 5G IAB Networks</h2>
-                <button class="close-modal" onclick="closeModal('project1-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This research project focused on optimising task offloading strategies in 5G Integrated Access and Backhaul (IAB) networks to minimize latency and energy consumption for edge computing applications.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">5G Networks</span>
-                        <span class="tech-tag">Edge Computing</span>
-                        <span class="tech-tag">Optimization</span>
-                        <span class="tech-tag">MATLAB</span>
-                        <span class="tech-tag">Network Simulation</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 8 weeks</li>
-                            <li><strong>Role:</strong> Researcher & Developer</li>
-                            <li><strong>Category:</strong> Networking & Edge Computing</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Existing computation offloading methods are ineffective for 5G mmWave IAB networks because they assume stable links and simple topologies. They fail to dynamically adapt to the real-world challenges of volatile mmWave signals, the energy cost of multi-hop routing, and congestion in a shared wireless backhaul.</p>
-                    
-                    <h4>Key Challenges</h4>
-                    <ul>
-                        <li>Energy efficiency in multi-hop network topologies</li>
-                        <li>Conflicting quality of service requirements across different 5G network slices</li>
-                        <li>Computational complexity for real time decision making</li>
-                        <li>Designing an algorithm complex enough to be effective yet simple enough for polynomial-time execution</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Key Results</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> The proposed multi-objective algorithm maintains a balanced trade-off between energy efficiency (89.3%) and offloading rate (43.9%) while achieving minimal latency, full deadline adherence, and 100% reliability across multiple network slices.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li>Energy efficiency: 89.3%</li>
-                        <li>Offloading rate: 43.9%</li>
-                        <li>Minimal latency achieved across tasks</li>
-                        <li>100% reliability across network slices</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <div class="links">
-                        <a href="projects.html#project1" class="link-btn">View Full Project Details</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<script>
+    /* =========================================
+       1. PHYSICS ENGINE (Background)
+       ========================================= */
+    const canvas = document.getElementById('component-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    const mouse = { x: -1000, y: -1000, radius: 160 };
+    const COMPONENT_TYPES = ['resistor', 'capacitor', 'inductor', 'voltage', 'ground', 'fourier', 'ic', 'opamp', 'diode', 'transistor', 'and_gate'];
+    const NUM_COMPONENTS = 65;
 
-    <!-- Project 5 Modal (Hand Motion Measurement System) -->
-    <div id="project5-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Hand Motion Measurement System for Stroke Rehabilitation</h2>
-                <button class="close-modal" onclick="closeModal('project5-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This project involved the design, construction, and testing of a displacement measurement system to monitor hand motion capability for stroke rehabilitation. The system uses a Hall effect sensor to detect hand displacement and classifies movement as "adequate" or "insufficient" based on clinical thresholds.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">Arduino</span>
-                        <span class="tech-tag">Hall Effect Sensor</span>
-                        <span class="tech-tag">Biomedical Engineering</span>
-                        <span class="tech-tag">Measurement Systems</span>
-                        <span class="tech-tag">Signal Processing</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 8-10 weeks</li>
-                            <li><strong>Role:</strong> Lead Designer & System Integrator</li>
-                            <li><strong>Category:</strong> Biomedical Engineering & Measurement Systems</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Stroke rehabilitation requires accurate monitoring of motor recovery progress, particularly in hand function. Existing solutions are often complex and expensive. This project aimed to create a cost-effective displacement measurement system that clinicians could use to characterize rehabilitation progress for stroke patients.</p>
-                    
-                    <h4>Key Features</h4>
-                    <ul>
-                        <li>Non-invasive hand motion monitoring using Hall effect sensor</li>
-                        <li>Real-time displacement measurement (10-40mm range)</li>
-                        <li>Movement classification: "ADQ" (Adequate) vs "INS" (Insufficient)</li>
-                        <li>Cost-effective solution for clinical rehabilitation</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> Achieved 85.83% accuracy with 181.35Hz bandwidth in measuring hand displacement (10-40mm range). System successfully classifies movement for stroke rehabilitation monitoring.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li>Accuracy: 85.83%</li>
-                        <li>Bandwidth: 181.35Hz</li>
-                        <li>System error: 14.17%</li>
-                        <li>Total cost: R388.40</li>
-                        <li>Movement classification threshold: 20mm</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <div class="links">
-                        <a href="projects.html#project5" class="link-btn">View Full Project Details</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    window.addEventListener('mouseout', () => { mouse.x = -1000; mouse.y = -1000; });
 
-    <!-- Project 6 Modal (Audio Controlled Toy Car) -->
-    <div id="project6-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Audio Controlled Remote Toy Car</h2>
-                <button class="close-modal" onclick="closeModal('project6-modal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="content-section">
-                    <h3>Project Overview</h3>
-                    <p>This project designed and implemented a microcontroller-free remote-controlled toy car operated through audio signals using DTMF tone detection. The system uses pure analog circuitry with LM567 tone detectors to decode specific audio frequencies for directional control.</p>
-                    
-                    <div class="tech-tags">
-                        <span class="tech-tag">Analog Circuits</span>
-                        <span class="tech-tag">DTMF Signal Processing</span>
-                        <span class="tech-tag">LM567 Tone Detectors</span>
-                        <span class="tech-tag">Control Systems</span>
-                        <span class="tech-tag">Embedded Design</span>
-                    </div>
-                    
-                    <div class="project-details">
-                        <ul>
-                            <li><strong>Duration:</strong> 8-10 weeks</li>
-                            <li><strong>Role:</strong> Team Lead & Circuit Designer</li>
-                            <li><strong>Category:</strong> Control Systems & Embedded Design</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Problem Statement</h3>
-                    <p>Design a remote-controlled toy car using audio signals as control input, with immunity against interference from other teams' signals, without using any microcontrollers, and with strict power constraints (max 5V across DC motors).</p>
-                    
-                    <h4>Key Constraints</h4>
-                    <ul>
-                        <li>No microcontrollers allowed in design</li>
-                        <li>Control signal limited to 20Hz-20kHz audio range</li>
-                        <li>Maximum 5V across DC motors</li>
-                        <li>No modifications to issued chassis</li>
-                        <li>Immunity against other teams' control signals</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <h3>Results & Analysis</h3>
-                    
-                    <div class="result-highlight">
-                        <strong>Key Achievement:</strong> Successfully completed track course in 7.38 minutes with full immunity against other teams' signals. Implemented dual-tone frequency detection system without any microcontrollers, meeting all design constraints.
-                    </div>
-                    
-                    <h4>Performance Metrics</h4>
-                    <ul>
-                        <li>Track completion time: 7.38 minutes</li>
-                        <li>Control distance: ~1 meter</li>
-                        <li>Full immunity against interference</li>
-                        <li>Dual-tone frequency detection for reliability</li>
-                        <li>Total cost: R930.00</li>
-                    </ul>
-                </div>
-                
-                <div class="content-section">
-                    <div class="links">
-                        <a href="projects.html#project6" class="link-btn">View Full Project Details</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Modal functionality
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+    class Component {
+        constructor() {
+            this.type = COMPONENT_TYPES[Math.floor(Math.random() * COMPONENT_TYPES.length)];
+            this.x = Math.random() * width; this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 0.8; this.vy = (Math.random() - 0.5) * 0.8;
+            this.size = Math.random() * 20 + 15; this.rotation = Math.random() * Math.PI * 2;
+            this.vr = (Math.random() - 0.5) * 0.02; this.baseOpacity = Math.random() * 0.35 + 0.1;
+            this.friction = 0.98; this.repelForce = 6;
         }
-        
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        draw() {
+            ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rotation);
+            ctx.strokeStyle = `rgba(0, 224, 198, ${this.baseOpacity})`; ctx.fillStyle = `rgba(0, 224, 198, ${this.baseOpacity})`;
+            ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+            const s = this.size;
+            switch(this.type) {
+                case 'resistor': ctx.beginPath(); ctx.moveTo(-s, 0); ctx.lineTo(-s/2, 0); ctx.lineTo(-s/4, -s/2); ctx.lineTo(0, s/2); ctx.lineTo(s/4, -s/2); ctx.lineTo(s/2, 0); ctx.lineTo(s, 0); ctx.stroke(); break;
+                case 'capacitor': ctx.beginPath(); ctx.moveTo(-s/2, -s/2); ctx.lineTo(-s/2, s/2); ctx.moveTo(s/2, -s/2); ctx.lineTo(s/2, s/2); ctx.moveTo(-s, 0); ctx.lineTo(-s/2, 0); ctx.moveTo(s/2, 0); ctx.lineTo(s, 0); ctx.stroke(); break;
+                case 'inductor': ctx.beginPath(); ctx.moveTo(-s, 0); ctx.arc(-s/2, 0, s/4, Math.PI, 0, true); ctx.arc(0, 0, s/4, Math.PI, 0, true); ctx.arc(s/2, 0, s/4, Math.PI, 0, true); ctx.lineTo(s, 0); ctx.stroke(); break;
+                case 'voltage': ctx.beginPath(); ctx.arc(0, 0, s/2, 0, Math.PI * 2); ctx.moveTo(-s, 0); ctx.lineTo(-s/2, 0); ctx.moveTo(s/2, 0); ctx.lineTo(s, 0); ctx.moveTo(0, -s/4); ctx.lineTo(0, s/4); ctx.moveTo(-s/4, 0); ctx.lineTo(s/4, 0); ctx.stroke(); break;
+                case 'ground': ctx.beginPath(); ctx.moveTo(0, -s/2); ctx.lineTo(0, 0); ctx.moveTo(-s/2, 0); ctx.lineTo(s/2, 0); ctx.moveTo(-s/3, s/4); ctx.lineTo(s/3, s/4); ctx.moveTo(-s/6, s/2); ctx.lineTo(s/6, s/2); ctx.stroke(); break;
+                case 'fourier': ctx.font = `${s}px 'Space Mono', monospace`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('∫', 0, 0); break;
+                case 'ic': ctx.strokeRect(-s/2, -s/2, s, s); for(let i=-s/3; i<=s/3; i+=s/3) { ctx.beginPath(); ctx.moveTo(-s, i); ctx.lineTo(-s/2, i); ctx.moveTo(s/2, i); ctx.lineTo(s, i); ctx.stroke(); } break;
+                case 'opamp': ctx.beginPath(); ctx.moveTo(-s/2, -s/2); ctx.lineTo(s/2, 0); ctx.lineTo(-s/2, s/2); ctx.closePath(); ctx.moveTo(-s, -s/4); ctx.lineTo(-s/2, -s/4); ctx.moveTo(-s, s/4); ctx.lineTo(-s/2, s/4); ctx.moveTo(s/2, 0); ctx.lineTo(s, 0); ctx.stroke(); break;
+                case 'diode': ctx.beginPath(); ctx.moveTo(-s, 0); ctx.lineTo(-s/2, 0); ctx.moveTo(-s/2, -s/2); ctx.lineTo(-s/2, s/2); ctx.moveTo(-s/2, -s/2); ctx.lineTo(s/2, 0); ctx.lineTo(-s/2, s/2); ctx.moveTo(s/2, 0); ctx.lineTo(s, 0); ctx.stroke(); break;
+                case 'transistor': ctx.beginPath(); ctx.arc(0, 0, s/2, 0, Math.PI * 2); ctx.moveTo(-s/6, -s/3); ctx.lineTo(-s/6, s/3); ctx.moveTo(-s, 0); ctx.lineTo(-s/6, 0); ctx.moveTo(-s/6, -s/6); ctx.lineTo(s/2, -s/2); ctx.moveTo(s/2, -s/2); ctx.lineTo(s/2, -s); ctx.moveTo(-s/6, s/6); ctx.lineTo(s/2, s/2); ctx.moveTo(s/2, s/2); ctx.lineTo(s/2, s); ctx.stroke(); break;
+                case 'and_gate': ctx.beginPath(); ctx.moveTo(-s/2, -s/2); ctx.lineTo(0, -s/2); ctx.arc(0, 0, s/2, -Math.PI/2, Math.PI/2); ctx.lineTo(-s/2, s/2); ctx.closePath(); ctx.moveTo(-s, -s/4); ctx.lineTo(-s/2, -s/4); ctx.moveTo(-s, s/4); ctx.lineTo(-s/2, s/4); ctx.moveTo(s/2, 0); ctx.lineTo(s, 0); ctx.stroke(); break;
+            }
+            ctx.restore();
         }
-        
-        // Close modal when clicking outside the content
-        window.onclick = function(event) {
-            const modals = document.getElementsByClassName('modal');
-            for (let i = 0; i < modals.length; i++) {
-                if (event.target == modals[i]) {
-                    modals[i].style.display = 'none';
-                    document.body.style.overflow = 'auto';
+        update() {
+            this.x += this.vx; this.y += this.vy; this.rotation += this.vr;
+            let dx = this.x - mouse.x; let dy = this.y - mouse.y; let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < mouse.radius) {
+                let force = (mouse.radius - distance) / mouse.radius; let directionX = dx / distance; let directionY = dy / distance;
+                this.vx += directionX * force * this.repelForce; this.vy += directionY * force * this.repelForce;
+                this.baseOpacity = Math.min(0.8, this.baseOpacity + 0.05);
+            }
+            this.vx *= this.friction; this.vy *= this.friction;
+            if (Math.abs(this.vx) < 0.1) this.vx += (Math.random() - 0.5) * 0.1;
+            if (Math.abs(this.vy) < 0.1) this.vy += (Math.random() - 0.5) * 0.1;
+            if (this.x < -50) this.x = width + 50; if (this.x > width + 50) this.x = -50;
+            if (this.y < -50) this.y = height + 50; if (this.y > height + 50) this.y = -50;
+            if (this.baseOpacity > 0.15 && distance >= mouse.radius) this.baseOpacity -= 0.005;
+        }
+    }
+    for (let i = 0; i < NUM_COMPONENTS; i++) particles.push(new Component());
+    function animate() {
+        ctx.clearRect(0, 0, width, height); 
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)'; ctx.lineWidth = 1; const gridSize = 50;
+        ctx.beginPath(); for(let x=0; x<width; x+=gridSize) { ctx.moveTo(x, 0); ctx.lineTo(x, height); } for(let y=0; y<height; y+=gridSize) { ctx.moveTo(0, y); ctx.lineTo(width, y); } ctx.stroke();
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    /* =========================================
+       2. PROJECT ROTATION ENGINE
+       ========================================= */
+    // UPDATED: Added the specific # links to jump directly to the project on projects.html
+    const projectsData = [
+        { tag: "CONTROL / VIBRATION", title: "Footbridge Active Vibration Control", desc: "Multi-actuator LQR controller reducing structural vibrations by up to 72% across six lateral modes using active tuned mass dampers in MATLAB.", link: "projects.html#project2" },
+        { tag: "NETWORKING", title: "5G mmWave Edge Computation", desc: "Designed a hybrid routing and offloading framework in ns-3. Achieved 89.3% energy efficiency and 4.4ms latency with 100% reliability across URLLC and eMBB slices.", link: "projects.html#project1" },
+        { tag: "BIOMEDICAL", title: "Stroke Rehabilitation Measurement System", desc: "Hall-effect displacement system tracking hand motion for stroke recovery. Achieved 85.83% accuracy within 10-40mm range using an Arduino Uno and non-linearity correction.", link: "projects.html#project5" },
+        { tag: "DSP / AUDIO", title: "Dual Microphone Array & Parking System", desc: "Electret mic array using STM32G474RE and PHAT algebra for acoustic source localisation, paired with an ultrasonic parking assistance feedback system.", link: "projects.html#project4" },
+        { tag: "CONTROL / EV", title: "EV Braking System Controller", desc: "Full state feedback controller for optimal slip coefficient and braking distance. Maintained 0.20 slip ratio and achieved a 3-second braking time from 100 km/h.", link: "projects.html#project3" },
+        { tag: "BIOMEDICAL", title: "Wearable EMG Prosthetic Interface", desc: "Engineered a SENIAM-compliant EMG signal acquisition device for bionic hands. Features differential amplification and bandpass filtering to isolate muscle intent.", link: "projects.html#project4" },
+        { tag: "PLC / AUTOMATION", title: "Automated Pallet Sorting", desc: "Siemens S7-1200 ladder logic for deterministic industrial automation. Implemented memory-based decision storage and shift-bit tracking.", link: "projects.html#project7" }
+    ];
+    
+    const projectContainer = document.getElementById('project-rotation-container');
+    let currentIndex = 0;
+    const itemsPerPage = 3;
+    const displayTime = 6000; const fadeTime = 1200; const settleTime = 300;
+
+    function renderProjects() {
+        projectContainer.classList.add('fade-out');
+        setTimeout(() => {
+            projectContainer.innerHTML = ''; 
+            for (let i = 0; i < itemsPerPage; i++) {
+                const absoluteIndex = currentIndex + i;
+                if (absoluteIndex < projectsData.length) {
+                    const p = projectsData[absoluteIndex];
+                    const card = document.createElement('div');
+                    card.className = 'tech-card'; 
+                    card.onclick = () => window.location.href = p.link;
+                    card.innerHTML = `<div class="tag">${p.tag}</div><h3>${p.title}</h3><p>${p.desc}</p>`;
+                    projectContainer.appendChild(card);
+                } else {
+                    const card = document.createElement('div');
+                    card.className = 'tech-card empty';
+                    card.innerHTML = `<div class="tag" style="opacity:0">EMPTY</div><h3 style="color:transparent">Empty Slot</h3><p style="color:transparent">...</p>`;
+                    projectContainer.appendChild(card);
                 }
             }
+            currentIndex += itemsPerPage;
+            if (currentIndex >= projectsData.length) currentIndex = 0; 
+            setTimeout(() => { projectContainer.classList.remove('fade-out'); }, settleTime);
+        }, fadeTime); 
+    }
+    renderProjects();
+    setInterval(renderProjects, displayTime + fadeTime + settleTime);
+</script>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+    let renderer, scene, camera, controls, currentModel;
+    let animationFrameId;
+    let isInitialized = false;
+
+    const modal = document.getElementById('pcb-modal');
+    const modalTitle = document.getElementById('pcb-modal-title');
+    const container = document.getElementById('pcb-canvas');
+    const loaderText = document.getElementById('pcb-loader');
+
+    const pdfSchematic = document.getElementById('pcb-pdf-schematic');
+    const pdfLayout = document.getElementById('pcb-pdf-layout');
+    const pdfReport = document.getElementById('pcb-pdf-report');
+
+    window.switchPcbTab = function(tabId, btnElement) {
+        document.querySelectorAll('.pcb-pane').forEach(pane => pane.classList.remove('active'));
+        document.querySelectorAll('.pcb-tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btnElement.classList.add('active');
+    };
+
+    window.open3DViewer = function(title, modelUrl, schematicPdfUrl, layoutPdfUrl, reportPdfUrl) {
+        modalTitle.innerText = title;
+        modal.classList.add('open');
+        
+        document.querySelectorAll('.pcb-pane').forEach(pane => pane.classList.remove('active'));
+        document.querySelectorAll('.pcb-tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('tab-schematic').classList.add('active');
+        document.querySelectorAll('.pcb-tab-btn')[0].classList.add('active');
+
+        pdfSchematic.src = schematicPdfUrl;
+        pdfLayout.src = layoutPdfUrl;
+        pdfReport.src = reportPdfUrl;
+
+        if (!isInitialized) {
+            initThreeJS();
+            isInitialized = true;
         }
+        loadModel(modelUrl);
+    };
+
+    window.close3DViewer = function() {
+        modal.classList.remove('open');
+        if(animationFrameId) cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
         
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modals = document.getElementsByClassName('modal');
-                for (let i = 0; i < modals.length; i++) {
-                    if (modals[i].style.display === 'block') {
-                        modals[i].style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                    }
-                }
-            }
-        });
-        
-        // Scroll to about section
-        function scrollToAbout() {
-            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+        pdfSchematic.src = '';
+        pdfLayout.src = '';
+        pdfReport.src = '';
+    };
+
+    function initThreeJS() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.set(0, 5, 10);
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1;
+        container.appendChild(renderer.domElement);
+
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 1.0;
+
+        scene.add(new THREE.AmbientLight(0xffffff, 1));
+        const dirLight1 = new THREE.DirectionalLight(0xffffff, 2);
+        dirLight1.position.set(5, 10, 7);
+        scene.add(dirLight1);
+
+        const pmremGenerator = new THREE.PMREMGenerator(renderer);
+        scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+
+        window.addEventListener('resize', onWindowResize);
+        function onWindowResize() {
+            if (!container.clientWidth) return;
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
         }
+
+        function animate3D() {
+            animationFrameId = requestAnimationFrame(animate3D);
+            if (controls) controls.update();
+            if (renderer && scene && camera) renderer.render(scene, camera);
+        }
+        animate3D();
+    }
+
+    function loadModel(url) {
+        loaderText.style.display = 'block';
+        loaderText.innerText = 'Loading 3D Model...';
+        loaderText.style.color = 'var(--text-dim)';
         
-        // Create floating shapes in header
-        function createFloatingShapes() {
-            const container = document.getElementById('floatingShapes');
-            const shapesCount = 15;
-            
-            for (let i = 0; i < shapesCount; i++) {
-                const shape = document.createElement('div');
-                shape.classList.add('shape');
+        if (currentModel) scene.remove(currentModel);
+
+        const loader = new GLTFLoader();
+        loader.load(
+            url, 
+            (gltf) => {
+                loaderText.style.display = 'none';
+                currentModel = gltf.scene;
                 
-                // Random properties
-                const size = Math.random() * 60 + 20;
-                const left = Math.random() * 100;
-                const animationDuration = Math.random() * 20 + 10;
-                const animationDelay = Math.random() * 5;
-                const opacity = Math.random() * 0.3 + 0.1;
+                const box = new THREE.Box3().setFromObject(currentModel);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                const maxDim = Math.max(size.x, size.y, size.z);
+                const scale = 5 / maxDim;
                 
-                shape.style.width = `${size}px`;
-                shape.style.height = `${size}px`;
-                shape.style.left = `${left}%`;
-                shape.style.animationDuration = `${animationDuration}s`;
-                shape.style.animationDelay = `${animationDelay}s`;
-                shape.style.opacity = opacity;
-                
-                container.appendChild(shape);
+                currentModel.scale.set(scale, scale, scale);
+                currentModel.position.x = -center.x * scale;
+                currentModel.position.y = -center.y * scale;
+                currentModel.position.z = -center.z * scale;
+
+                scene.add(currentModel);
+            },
+            (xhr) => {
+                if (xhr.total > 0) {
+                const percent = Math.round((xhr.loaded / xhr.total) * 100);
+                loaderText.innerText = `Loading Model... ${percent}%`;
             }
-        }
-        
-        // Skill details functionality
-        const skillDetails = {
-            control: {
-                title: "Control Systems",
-                description: "Design and analysis of feedback control systems for various applications including LQR controllers, state feedback, and vibration control.",
-                level: 90
             },
-            power: {
-                title: "Power Electronics",
-                description: "Design and implementation of power conversion circuits, motor drivers, and power management systems.",
-                level: 85
-            },
-            comm: {
-                title: "Communication Systems",
-                description: "Analysis and design of communication systems including 5G networks, edge computing optimization, and network protocols.",
-                level: 80
-            },
-            matlab: {
-                title: "MATLAB & Simulink",
-                description: "Simulation, modeling, and analysis of engineering systems including control systems, signal processing, and network simulations.",
-                level: 95
-            },
-            cpp: {
-                title: "C/C++",
-                description: "Embedded systems programming, algorithm implementation, and microcontroller programming for various applications.",
-                level: 85
-            },
-            python: {
-                title: "Python",
-                description: "Data analysis, automation, scientific computing, and algorithm development for engineering applications.",
-                level: 80
-            },
-            ltspice: {
-                title: "LTspice",
-                description: "Circuit simulation and analysis for electronic designs including analog circuits, filters, and signal conditioning.",
-                level: 75
-            },
-            arduino: {
-                title: "Arduino",
-                description: "Prototyping and implementation of embedded systems for biomedical devices, measurement systems, and control applications.",
-                level: 90
-            },
-            plc: {
-                title: "PLC Programming",
-                description: "Industrial automation using Siemens PLCs with ladder logic programming for deterministic control systems.",
-                level: 70
-            },
-            embedded: {
-                title: "Embedded Systems",
-                description: "Design and implementation of microcontroller-based systems for real-time control and measurement applications.",
-                level: 85
+            (error) => {
+                console.error('Error loading model:', error);
+                loaderText.innerText = "Error loading model.\nCheck file path or run a local server.";
+                loaderText.style.color = "#ff4d4d";
+                loaderText.style.textAlign = "center";
             }
-        };
-        
-        function setupSkillInteractions() {
-            const skillTags = document.querySelectorAll('.skill-tag');
-            const skillDetailsContainer = document.getElementById('skill-details');
-            
-            skillTags.forEach(tag => {
-                tag.addEventListener('click', function() {
-                    const skill = this.getAttribute('data-skill');
-                    
-                    // Remove active class from all tags
-                    skillTags.forEach(t => t.classList.remove('active'));
-                    
-                    // Add active class to clicked tag
-                    this.classList.add('active');
-                    
-                    // Show skill details
-                    if (skillDetails[skill]) {
-                        const detail = skillDetails[skill];
-                        skillDetailsContainer.innerHTML = `
-                            <h4>${detail.title}</h4>
-                            <p>${detail.description}</p>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: ${detail.level}%"></div>
-                            </div>
-                            <p>Proficiency: ${detail.level}%</p>
-                        `;
-                        skillDetailsContainer.style.display = 'block';
-                        
-                        // Animate progress bar
-                        setTimeout(() => {
-                            const progressBar = skillDetailsContainer.querySelector('.progress');
-                            progressBar.style.width = `${detail.level}%`;
-                        }, 10);
-                    }
-                });
-            });
-            
-            // Hide skill details when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.skills') && !event.target.closest('#skill-details')) {
-                    skillDetailsContainer.style.display = 'none';
-                    skillTags.forEach(t => t.classList.remove('active'));
-                }
-            });
-        }
-        
-        // Initialize when page loads
-        window.addEventListener('DOMContentLoaded', function() {
-            createFloatingShapes();
-            setupSkillInteractions();
-            
-            // Add scroll animation to sections
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe sections for animation
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                section.style.opacity = 0;
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(section);
-            });
-        });
-    </script>
+        );
+    }
+</script>
 </body>
 </html>
